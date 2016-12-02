@@ -13,7 +13,7 @@ class Modules extends Model
      *
      * @var array
      */
-    protected $table="emc_modules";
+    protected $table="modules";
     protected $fillable = [
         'id','name','url','parent_id','priority','status',
     ];

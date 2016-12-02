@@ -12,7 +12,7 @@ class CreateCmsOurClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emc_our_clients', function (Blueprint $table) {
+        Schema::create('our_clients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
@@ -32,6 +32,6 @@ class CreateCmsOurClientsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('emc_our_clients');
+        Schema::drop('our_clients');
     }
 }

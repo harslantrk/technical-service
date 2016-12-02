@@ -12,7 +12,7 @@ class CreateSidebarMenuTable extends Migration
      */
     public function up()
     {
-         Schema::create('emc_modules', function (Blueprint $table) {
+         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('url')->unique();
@@ -32,6 +32,6 @@ class CreateSidebarMenuTable extends Migration
      */
     public function down()
     {
-        Schema::drop('emc_modules');
+        Schema::drop('modules');
     }
 }

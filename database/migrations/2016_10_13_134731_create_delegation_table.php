@@ -13,12 +13,11 @@ class CreateDelegationTable extends Migration
     public function up()
     {
         //
-        Schema::create('emc_delegation', function (Blueprint $table) {
+        Schema::create('delegation', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->longText('auth');            
             $table->enum('status',array('0','1'));
-
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateDelegationTable extends Migration
     public function down()
     {
      
-        Schema::drop('emc_delegation');
+        Schema::drop('delegation');
     }
 }

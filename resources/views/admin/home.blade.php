@@ -22,26 +22,26 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>{{count($patients)}}</h3>
+          <h3>1</h3>
           <p>Kayıtlı Hasta</p>
         </div>
         <div class="icon">
           <i class="ion ion-medkit"></i>
         </div>
-        <a href="/admin/patient" class="small-box-footer">Tüm Hastalar <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Tüm Hastalar <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>{{$reports}}</h3>
+          <h3>1</h3>
           <p>Hasta Raporu</p>
         </div>
         <div class="icon">
           <i class="ion ion-person"></i>
         </div>
-        <a href="/admin/bez/reports/" class="small-box-footer">Tüm Hastalar <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Tüm Hastalar <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
     <div class="col-lg-3 col-xs-6">
@@ -94,11 +94,6 @@
               </thead>
               <tbody>
               <tr>
-                @foreach($last_sms as $sms)
-                  <td>{{$sms->created_at}}</td>
-                  <td>{{$sms->phone}}</td>
-                  <td><span>{{$sms->sms_detail}}</span></td>
-                @endforeach
               </tr>
               </tbody>
             </table>
@@ -128,12 +123,6 @@
               </thead>
               <tbody>
               <tr>
-                @foreach($last_patient as $patient)
-                  <td><a href="/admin/patient/edit/{{$patient->id}}">{{$patient->name}}</a></td>
-                  <td>{{$patient->tc_no}}</td>
-                  <td><span>{{$patient->created_at}}</span></td>
-                  <td><span>{{$patient->street.' '.$patient->district.' / '.$patient->city}}</span></td>
-                @endforeach
               </tr>
               </tbody>
             </table>

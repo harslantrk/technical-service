@@ -3,13 +3,6 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- ALERT -->
-        @if (Session::has('flash_notification.message'))
-            <div class="alert alert-{{ Session::get('flash_notification.level') }}">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                {{ Session::get('flash_notification.message') }}
-            </div>
-    @endif
     <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -85,28 +78,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php $no=1;?>
-                                            @foreach($patients as $patient)
-                                                <tr>
-                                                    <td>{{$no}}</td>
-                                                    <td>
-                                                        <label>
-                                                            <input type="checkbox" name="hasta_id[{{$patient->id}}]" class="minimal">
-                                                        </label>
-                                                    </td>
-                                                    <td>{{$patient->name}}</td>
-                                                    <td>{{$patient->phone}} <input type="hidden" name="hasta_tel[{{ $patient->id }}]" value="{{ $patient->phone }}"></td>
-                                                    <td>
-                                                        <label>
-                                                            <input type="checkbox" name="veli_id[{{$patient->id}}]" class="minimal">
-                                                        </label>
-                                                    </td>
-                                                    <td>{{$patient->parent_name}}</td>
-                                                    <td>{{$patient->parent_kinship}}</td>
-                                                    <td>{{$patient->parent_phone}} <input type="hidden" name="veli_tel[{{ $patient->id }}]" value="{{ $patient->parent_phone }}"></td>
-                                                </tr>
-                                                <?php $no++;?>
-                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>

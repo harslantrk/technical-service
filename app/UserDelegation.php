@@ -12,7 +12,7 @@ class UserDelegation extends Model
      *
      * @var array
      */
-    protected $table="emc_delegation";
+    protected $table="delegation";
     protected $fillable = [
         'id','name', 'auth','status',
     ];

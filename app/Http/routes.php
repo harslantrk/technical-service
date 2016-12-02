@@ -55,34 +55,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/admin/users/update','Admin\UserController@update');//var olan üyenin bilgilerini güncelleyen fonksiyon
 	/*Üyelik Modülü Bitişi*/
 
-    /*Galeri Modülü Başlangıç*/
-    Route::post('/admin/gallery','Admin\GalleryController@index');//Galeri load
-    Route::post('/admin/gallery/upload','Admin\GalleryController@upload');//Galeri upload
-    Route::post('/admin/gallery/delete/{url}','Admin\GalleryController@delete');//Galeri delete
-    /*Galeri Modülü Bitiş*/
-    
     /*Dosya Yöneticisi Modülü*/
     Route::get('/admin/files','Admin\FilesController@index'); // Tüm Dosyalar
     Route::post('/admin/files/single-upload','Admin\FilesController@singleUpload');
-
-    /*Blog Modülü Başlangıç*/
-    Route::get('/admin/blog','Admin\BlogController@index');//blog listeleme    
-    Route::get('/admin/blog/create','Admin\BlogController@create');//yeni blog oluşturma
-    Route::get('/admin/blog/edit/{id}','Admin\BlogController@edit');//blog düzenleme
-    Route::get('/admin/blog/delete/{id}','Admin\BlogController@delete');//var olan blog'un bilgilerini silen fonksiyon
-    Route::get('/admin/blog/comment/edit/{id}','Admin\CommentController@edit');//blog yorum düzenleme
-    Route::get('/admin/blog/comment/delete/{id}','Admin\CommentController@delete');//var olan blog'un yorum silen fonksiyon
-    Route::get('/admin/blog/comment/{id}','Admin\CommentController@index');//blog yorum listeleme
-    Route::get('/admin/blog/comment/create','Admin\CommentController@create');//yeni üye ekleme sayfası
-
-    Route::post('/admin/blog/save','Admin\BlogController@save');//yeni üye kayıt eden fonksiyon
-    Route::post('/admin/blog/update','Admin\BlogController@update');//var olan blog'un bilgilerini güncelleyen fonksiyon
-    Route::post('/admin/blog/attachment','Admin\BlogController@attachment_index');//Eklenti load
-    Route::post('/admin/blog/attachment/upload','Admin\BlogController@attachment_upload');//Eklenti upload
-    Route::post('/admin/blog/attachment/delete/{url}','Admin\BlogController@attachment_delete');//Eklenti delete
-    Route::post('/admin/blog/comment/update','Admin\CommentController@update');//var olan blog'un bilgilerini güncelleyen fonksiyon
-
-    /*Blog Modülü Bitiş*/
 
     /*Hizmetler Modülü Başlangıç*/
 
@@ -273,16 +248,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Modüller Modülü Son
 
-    //Hastalar Modülü Başlangıç
-    Route::get('/admin/patient','Admin\PatientController@index'); //Tüm Hastalar Sayfası
-    Route::get('/admin/patient/create','Admin\PatientController@create'); //Yeni Hasta Ekleme
-    Route::get('/admin/patient/edit/{id}','Admin\PatientController@edit');//Hasta Düzenleme
-    Route::get('/admin/patient/delete/{id}','Admin\PatientController@delete'); //Hasta Silme
-
-    Route::post('/admin/patient/save','Admin\PatientController@save'); //Hastayı Kaydetme
-    Route::post('/admin/patient/update','Admin\PatientController@update'); //Hastayı Güncelleme
-    //Hastalar Modülü Bitiş
-
     //Sms Modülü Başlangıç
     Route::get('/admin/sms','Admin\SmsController@index'); //Tüm Hastalar Sayfası
     Route::get('/admin/sms/create','Admin\SmsController@create'); //Yeni Hasta Ekleme
@@ -296,20 +261,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/admin/users/resizeImagePost','Admin\UserController@resizeImagePost');
 
-    //Bez Raporlar Başlangıc
-    Route::get('/admin/bez/reports','Admin\BezController@index'); //Bez Kullananları Cekme
-    Route::get('/admin/bez/reports/show/{id}','Admin\BezController@show'); //Kullanıcının Raporlarını Listeleme
-    Route::get('/admin/bez/reports/show/receipt/{report_id}/{patient_id}','Admin\BezController@receiptShow'); //Rapor İçindeki Reçeteleri Listeleme
-    Route::get('/admin/bez/reports/show/receipt/payment/{receipt_id}/{patient_id}','Admin\BezController@paymentShow'); //Reçete İçindeki Ödemeleri Listeleme
-    Route::get('/admin/bez/reports/ExcelReport/{patient_id}','Admin\BezController@ExcelReport'); //Kullanıcının Raporlarını Listeleme
-
-    Route::post('/admin/bez/reports/Reportsave','Admin\BezController@BezReportSave'); //Bez İçin Rapor Kaydetme
-    Route::post('/admin/bez/reports/ReceiptSave','Admin\BezController@BezReceiptSave'); //Bez İçin Reçete Kaydetme
-    Route::post('/admin/bez/reports/Paymentsave','Admin\BezController@Paymentsave'); //Reçete İçin Ödeme Kaydetme
-    Route::post('/admin/bez/reports/reportGetir','Admin\BezController@reportGetir'); //Reçete İçin Raporları Getirme Ajax
-    Route::post('/admin/bez/reports/PaymentGetir','Admin\BezController@PaymentGetir'); //Ödeme İçin Reçete Getirme Ajax
-
-    //Bez  Raporlar Bitiş
 });
 
 

@@ -12,7 +12,7 @@ class CreateReferenceTable extends Migration
      */
     public function up()
     {
-        Schema::create('emc_reference', function (Blueprint $table) {
+        Schema::create('reference', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('link');
@@ -30,6 +30,6 @@ class CreateReferenceTable extends Migration
      */
     public function down()
     {
-        Schema::drop('emc_reference');
+        Schema::drop('reference');
     }
 }

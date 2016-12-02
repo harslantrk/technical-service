@@ -12,7 +12,7 @@ class CreateEmcServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('emc_services', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('slug');
@@ -35,6 +35,6 @@ class CreateEmcServicesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('emc_services');
+        Schema::drop('services');
     }
 }
