@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Brand;
+use App\UserCustomers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,6 +22,8 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view('admin.home');
+        $brand = Brand::all()->count();
+        $customer = UserCustomers::all()->count();
+        return view('admin.home',['brand' => $brand,'customer' => $customer]);
     }
 }

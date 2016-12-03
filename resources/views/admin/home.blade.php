@@ -22,26 +22,26 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>1</h3>
-          <p>Kayıtlı Hasta</p>
+          <h3>{{$brand}}</h3>
+          <p>Kayıtlı Marka</p>
         </div>
         <div class="icon">
           <i class="ion ion-medkit"></i>
         </div>
-        <a href="#" class="small-box-footer">Tüm Hastalar <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{URL::to('/admin/brand')}}" class="small-box-footer">Tüm Markalar <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>1</h3>
-          <p>Hasta Raporu</p>
+          <h3>{{$customer}}</h3>
+          <p>Adet Müşteri</p>
         </div>
         <div class="icon">
           <i class="ion ion-person"></i>
         </div>
-        <a href="#" class="small-box-footer">Tüm Hastalar <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{URL::to('/admin/customers')}}" class="small-box-footer">Tüm Müşteriler <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
     <div class="col-lg-3 col-xs-6">

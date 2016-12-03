@@ -19,68 +19,47 @@
 <section class="content">	
   <div class="row">
 		<div class="col-lg-12">
-      <div class="box box-primary" style="padding: 1%">
-        <div class="box-header with-border" style="margin-bottom: 1%">
-          <h3 class="box-title">Yeni Müşteri Ekle</h3>
-        </div>
-        <div class=box-body>
-        <form class="form-inline form-horizontal" id="customers_create_form" method="POST">
-        <table class="table table-bordered table-hover">
-         
-            <tr> <div class="form-group">
-       <td><label>Adı:</label></td>
-       <td><label><input type='text' class='form-control' name='name' /></label></td> </div></tr>
-         
-
-        <tr> <div class="form-group">
-         <td><label>Soyadı:</label></td>
-         <td><label><input type='text' class='form-control' name='surname' /></label></td> </div></tr>
-
-
-
-        <tr> <div class="form-group">
-         <td><label>Telefon Numarası:</label></td>
-         <td><label><input type='text' class='form-control phone_mask' name='phone'  /></label></td> </div></tr>
-        
-        
-
-        <tr> <div class="form-group">
-         <td><label>Cep Telefonu:</label></td>
-         <td><label><input type='text' class='form-control phone_mask' name='gsm'  /></label></td> </div></tr>
-
-        <tr> <div class="form-group">
-         <td><label>Email Adresi:</label></td>
-         <td><label><input type='email' class='form-control' name='email' /></label></td> </div></tr>
-            
-
-        <tr> <div class="form-group">
-         <td><label>Adres:</label></td>
-          <td><label><textarea class="form-control adres" name="adres" id="adres"></textarea>           
-        </label></td> </div></tr>
-<tr><td colspan="2">
-        <div class="box-header with-border" style="margin-bottom: 1%;margin-top: 1%;">
-          <h3 class="box-title">Yeni Müşteri Ekle</h3>
-        </div>
-        </td></tr>
- 
-        <tr> <div class="form-group">
-          <td><label>Şirketin Adı:</label></td>
-          <td><label><input type='text' class='form-control' name='companyName'/></label></td> </div></tr>
-
-        <tr> <div class="form-group">
-          <td><label>Şirketin Numarası:</label></td>
-          <td><label><input type='text' class='form-control phone_mask' name='companyPhone'  /></label></td> </div></tr>
-
-        <div class='form-group'>
-          <td colspan="2"><label>
-            <button class='btn btn-primary' id='customers_create_Btn'><i class="fa fa-save"></i> Kaydet</button>
-          </label></td> </div></tr>
-
-         </table>
-        </form>
-      </div>
-      </div>
-      
+            <div class="box box-primary" style="padding: 1%">
+                <div class="box-header with-border" style="margin-bottom: 1%">
+                  <h3 class="box-title">Yeni Müşteri Ekle</h3>
+                </div>
+                <div class=box-body>
+                    <form class="form-horizontal" method="post" action="{{URL::to('/admin/customers/save')}}">
+                        {!! csrf_field() !!}
+                        <div class="form-group">
+                            <label class="control-label">Adı</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Soyadı</label>
+                            <input type="text" class="form-control" name="surname">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">E-Mail</label>
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Telefon</label>
+                            <input type="text" class="form-control" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Gsm</label>
+                            <input type="text" class="form-control" name="gsm">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Adres</label>
+                            <input type="text" class="form-control" name="adres">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Şirket Adı</label>
+                            <input type="text" class="form-control" name="companyName">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-hdd-o"></i> Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 		</div>
 	</div>
 </section><!-- /.content -->

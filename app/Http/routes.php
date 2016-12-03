@@ -61,12 +61,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     /*Hizmetler Modülü Başlangıç*/
 
-    Route::get('/admin/services','Admin\ServiceController@index');
-    Route::get('/admin/services/create','Admin\ServiceController@create');
-    Route::get('/admin/services/edit/{id}','Admin\ServiceController@edit');
-    Route::get('/admin/services/delete/{id}','Admin\ServiceController@delete');
-    Route::post('/admin/services/save','Admin\ServiceController@save');
-    Route::post('/admin/services/update','Admin\ServiceController@update');
+    Route::get('/admin/service','Admin\ServiceController@index');
+    Route::get('/admin/service/create','Admin\ServiceController@create');
+    Route::get('/admin/service/edit/{id}','Admin\ServiceController@edit');
+    Route::get('/admin/service/delete/{id}','Admin\ServiceController@delete');
+
+    Route::post('/admin/service/save','Admin\ServiceController@save');
+    Route::post('/admin/service/update','Admin\ServiceController@update');
 
     /*Hizmetler Modülü Bitiş*/
 
@@ -229,12 +230,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Kullanıcılar Modülü
     Route::get('/admin/customers','Admin\UserCustomersController@index');
-    Route::get('/admin/customers/create','Admin\UserCustomersController@create_file');
-    Route::get('/admin/customers/edit/{id}','Admin\UserCustomersController@update_file');
+    Route::get('/admin/customers/create','Admin\UserCustomersController@create');
+    Route::get('/admin/customers/edit/{id}','Admin\UserCustomersController@edit');
+    Route::get('/admin/customers/delete/{delete_id}','Admin\UserCustomersController@delete');
 
-    Route::post('admin/customers/ajaxCustomersCreate','Admin\UserCustomersController@ajax_createFile');
-    Route::post('/admin/customers/ajaxCustomersEdit','Admin\UserCustomersController@ajax_editFile');
-    Route::get('/admin/customers/customerDelete','Admin\UserCustomersController@get_deleteFile');
+    Route::post('admin/customers/save','Admin\UserCustomersController@save');
+    Route::post('/admin/customers/update','Admin\UserCustomersController@update');
     //Kullanıcılar Modülü Son
 
     // Modüller Modülü
@@ -260,6 +261,16 @@ Route::group(['middleware' => ['auth']], function () {
     //Sms Modülü Bitiş
 
     Route::post('/admin/users/resizeImagePost','Admin\UserController@resizeImagePost');
+
+    //Marka Modülü Başlangıç
+    Route::get('/admin/brand','Admin\BrandController@index'); //Tüm Hastalar Sayfası
+    Route::get('/admin/brand/create','Admin\BrandController@create'); //Tüm Hastalar Sayfası
+    Route::get('/admin/brand/edit/{id}','Admin\BrandController@edit'); //Tüm Hastalar Sayfası
+    Route::get('/admin/brand/delete/{id}','Admin\BrandController@delete'); //Tüm Hastalar Sayfası
+
+    Route::post('/admin/brand/save','Admin\BrandController@save'); //Hastayı Kaydetme
+    Route::post('/admin/brand/update/{id}','Admin\BrandController@update'); //Hastayı Kaydetme
+    //Marka Modülü Bitiş
 
 });
 

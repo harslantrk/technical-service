@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmcServicesTable extends Migration
+class CreateServiceTable extends Migration
 {
     /**
      * Run the migrations.

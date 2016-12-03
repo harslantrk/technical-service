@@ -708,7 +708,7 @@
 
       $('.phone_mask').inputmask('0(999)999-9999');
 
-      $("#users_table, #intro_table, #popup_table, #pagein_table,#hastalar_table").DataTable({
+      $("#users_table, #intro_table, #popup_table, #pagein_table,#hastalar_table,#customers_table,#service_table,#brand_table").DataTable({
           "language": {
               "emptyTable": "Hiç bir veri bulunamadı",
               "info": "Gösterim _START_ ile _END_ arası _TOTAL_ toplam veri",
@@ -734,24 +734,32 @@
 
       function deleteApprove(link) {
           swal({
-                      title: "Silmek istediğinize emin misiniz?",
-                      text: "Eğer silerseniz, sildiğiniz veriye bir daha ulaşamayacağınızı onaylamış olursunuz!",
-                      type: "warning",
-                      showCancelButton: true,
-                      confirmButtonColor: "#DD6B55",
-                      confirmButtonText: "Evet, veriyi sil!",
-                      cancelButtonText: "Hayır, veriyi silme!",
-                      closeOnConfirm: false,
-                      closeOnCancel: false
-                  },
-                  function(isConfirm){
-                      if (isConfirm) {
-                          swal("Silindi!", "Veriniz başarılı bir şekilde silindi.", "success");
-                          location.href = link;
-                      } else {
-                          swal("İptal Edildi", "Verinize herhangi bir işlem yapılmadı.", "error");
-                      }
-                  });
+                  title: "Silmek istediğinize emin misiniz?",
+                  text: "Eğer silerseniz, sildiğiniz veriye bir daha ulaşamayacağınızı onaylamış olursunuz!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Evet, veriyi sil!",
+                  cancelButtonText: "Hayır, veriyi silme!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+              },
+              function(isConfirm){
+                  if (isConfirm) {
+                      swal("Silindi!", "Veriniz başarılı bir şekilde silindi.", "success");
+                      location.href = link;
+                  } else {
+                      swal("İptal Edildi", "Verinize herhangi bir işlem yapılmadı.", "error");
+                  }
+              });
+      }
+      function updateApprove() {
+          swal({
+                  title: "İşlem Başarılı",
+                  text: "Güncelleme İşleminiz Başarı İle Gerçekleştirilmiştir.",
+                  type: "warning",
+                  confirmButtonColor: "#DD6B55"
+              });
       }
 
 

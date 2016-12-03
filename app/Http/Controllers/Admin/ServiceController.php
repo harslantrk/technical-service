@@ -59,7 +59,7 @@ class ServiceController extends Controller
         $hizmet->priority = $request->input('priority');
         $hizmet->status = 1;
         $hizmet->save();
-    	return redirect('/admin/services');	
+    	return redirect('/admin/service');
     	Flash::message('Hizmet başarılı bir şekilde eklendi.','success');
     }
 
@@ -77,7 +77,7 @@ class ServiceController extends Controller
         $hizmet->status = 1;
         $hizmet->save();
 		
-        return redirect('/admin/services');	
+        return redirect('/admin/service');
         Flash::message('Hizmet başarılı bir şekilde güncellendi.','success');
     }
 

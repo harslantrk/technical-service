@@ -17,10 +17,9 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('email')->unique();
-            $table->string('phone')->unique();
-            $table->string('gsm')->unique();
+            $table->string('phone');
+            $table->string('gsm');
             $table->string('companyName');
-            $table->string('companyPhone');
             $table->text('adres');
             $table->enum('status',array('1','0'));
             $table->timestamps();

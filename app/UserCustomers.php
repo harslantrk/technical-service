@@ -11,8 +11,8 @@ class UserCustomers extends Model
      *
      * @var array
      */
-    protected $table="emc_customers";
+    protected $table="customers";
     protected $fillable = [
-        'id','name', 'surname','email','phone','gsm','adres','companyName','companyPhone','status',
+        'name', 'surname','email','phone','gsm','adres','companyName','status'
     ];
 }

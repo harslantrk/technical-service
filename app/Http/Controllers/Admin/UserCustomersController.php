@@ -2,60 +2,83 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Auth;
-
+use Laracasts\Flash\Flash;
 use App\Http\Requests;
 use DB;
 use App\UserCustomers;
 use App\UserDelegation;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class UserCustomersController extends Controller
 {
+    //Hizmetlerimiz Listeleme
+    public function __construct(Request $request)
+    {
+        $url = $request->path();
+        Helper::sessionReload();
+        $sess= Helper::shout($url);
+        $this->read=$sess['r'];
+        $this->update=$sess['u'];
+        $this->add=$sess['a'];
+        $this->delete=$sess['d'];
+        $this->sess=$sess;
+    }
    	
    	public function index(){
-
+        if($this->read==0){
+            return redirect()->action('Admin\HomeController@index');
+        }
    		$data=UserCustomers::where('status','1')->get();
 
-   		return view('admin.customers.index',['data'=>$data]);
+   		return view('admin.customers.index',['data'=>$data,'deleg' => $this->sess]);
    	}
 
-   	public function create_file(Request $request){
-   		
+   	public function create(Request $request){
+        if($this->read==0 || $this->add==0){
+            return redirect()->action('Admin\HomeController@index');
+        }
    		return view('admin.customers.create');
    	}
-      public function update_file($id){
-         $data=UserCustomers::where('id',$id)->first();
-
-         return view('admin.customers.update',['data'=>$data]);
-      }
-
-      public function ajax_createFile(Request $request){
+      public function save(Request $request){
          $data=$request->all();
 
          $data['status']='1';
          
-         $error=UserCustomers::create($data);
+         UserCustomers::create($data);
 
-            print_r($error);
+          return redirect()->action('Admin\UserCustomersController@index');
       }
 
-      public function ajax_editFile(Request $request){
+    public function edit($id){
+        if($this->read==0 || $this->update==0){
+            return redirect()->action('Admin\HomeController@index');
+        }
+        $customers = UserCustomers::where('id',$id)->first();
+
+        return view('admin.customers.edit',['customers'=>$customers]);
+    }
+
+      public function update(Request $request){
          $data=$request->all();
 
-         $updateOrder = UserCustomers::find($data['id'])->update($data);
-
-         print_r($updateOrder);
+         UserCustomers::find($data['id'])->update($data);
+          Flash::message('Tamam','success');//Güncelleme İşleminde Uyarı Verdirtme
+          return redirect()->action('Admin\UserCustomersController@index');
       }
 
-      public function get_deleteFile(Request $request){
-         $data=$request->all();
-         $category = UserCustomers::where('id', $data['id'])->first();
-         $category->status = '0';
-         $category->save();
+      public function delete($delete_id){
+          if($this->read==0 || $this->delete==0){
+              return redirect()->action('Admin\HomeController@index');
+          }
+         $customers = UserCustomers::where('id', $delete_id)->first();
+          $customers->status = '0';
+          $customers->save();
 
-         return redirect()->action('Admin\UserCustomersController@index');
+          return redirect()->back();
       }
 }

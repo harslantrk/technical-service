@@ -21,7 +21,7 @@
           <div class="row">
           @if($deleg['a']==1)
           <div class="col-lg-12">
-				<a href="/admin/services/create" class="button btn btn-primary">Hizmet Ekle</a>
+				<a href="/admin/service/create" class="button btn btn-primary">Hizmet Ekle</a>
 			</div>
           @endif
             <div class="col-xs-12">
@@ -31,7 +31,7 @@
                   <h3 class="box-title">Hizmetler</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="service_table" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                       	<th>Başlık</th>
@@ -60,38 +60,12 @@
                             </tr>
                            @endif 
                         @endforeach
-                      
-                      
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Başlık</th>
-                        <th>Kısa Açıklama</th>
-                        <th>Öncelik</th>
-                        <th>Oluşturma Tarihi</th>
-                        <th>Güncelleme Tarihi</th> 
-                        <th>İŞLEM</th>                        
-                      </tr>
-                    </tfoot>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
-        </section><!-- /.content -->   
-
+        </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
 @endsection
