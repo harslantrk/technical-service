@@ -272,6 +272,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/brand/update/{id}','Admin\BrandController@update'); //Hastayı Kaydetme
     //Marka Modülü Bitiş
 
+    //Ürün Türü Modülü Başlangıç
+    Route::get('/admin/product_type','Admin\Product_TypeController@index'); //Tüm Hastalar Sayfası
+    Route::get('/admin/product_type/create','Admin\Product_TypeController@create'); //Tüm Hastalar Sayfası
+    Route::get('/admin/product_type/edit/{id}','Admin\Product_TypeController@edit'); //Tüm Hastalar Sayfası
+    Route::get('/admin/product_type/delete/{id}','Admin\Product_TypeController@delete'); //Tüm Hastalar Sayfası
+
+    Route::post('/admin/product_type/save','Admin\Product_TypeController@save'); //Hastayı Kaydetme
+    Route::post('/admin/product_type/update/{id}','Admin\Product_TypeController@update'); //Hastayı Kaydetme
+    //Ürün Türü Modülü Bitiş
+
 });
 
 
