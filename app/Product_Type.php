@@ -10,4 +10,8 @@ class Product_Type extends Model
     protected $fillable = [
         'product_type','user_id','status'
     ];
+
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

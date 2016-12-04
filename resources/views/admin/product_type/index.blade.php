@@ -51,7 +51,7 @@
                                             <td>{{\Carbon\Carbon::parse($product_type->updated_at)->format('d/m/Y H:i:s')}}</td>
                                             <td>
                                                 @if($deleg['u']==1)<a href="{{URL::to('/admin/product_type/edit/'.$product_type->id)}}" class="button btn btn-success"><i class="fa fa-edit"></i></a>@endif
-                                                @if($deleg['d']==1)<a onclick="deleteApprove('/admin/brand/delete/{{$product_type->id}}')" class="button btn btn-danger"><i class="fa fa-trash"></i></a>@endif
+                                                @if($deleg['d']==1)<a onclick="deleteApprove('/admin/product_type/delete/{{$product_type->id}}')" class="button btn btn-danger"><i class="fa fa-trash"></i></a>@endif
                                             </td>
                                         </tr>
                                     @endif
