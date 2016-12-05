@@ -12,23 +12,18 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-         Schema::create('products', function (Blueprint $table) {
+         Schema::create('product', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id');
             $table->string('name');
-            $table->string('description');
-            $table->text('content');
-            $table->text('image');
+            $table->integer('brand_id');
+            $table->integer('product_type_id');
+            $table->integer('user_id');
+            $table->text('detail');
+            $table->string('image');
             $table->integer('stock');
-            $table->integer('price');
-            $table->integer('seen_count');
-            $table->integer('like_count');
-            $table->string('tags');
-            $table->text('options');
-            $table->integer('priority');
-            $table->integer('display');
-            $table->integer('status');
-            $table->integer('author');
+            $table->string('in_price');
+            $table->string('out_price');
+            $table->enum('status',array('0','1'));
             $table->timestamps();
         });
     }
@@ -40,6 +35,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('products');
+        Schema::drop('product');
     }
 }

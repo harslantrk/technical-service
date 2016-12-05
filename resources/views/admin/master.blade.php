@@ -708,7 +708,7 @@
 
       $('.phone_mask').inputmask('0(999)999-9999');
 
-      $("#users_table, #intro_table, #popup_table, #pagein_table,#hastalar_table,#customers_table,#service_table,#brand_table,#product_type_table").DataTable({
+      $("#users_table,#intro_table,#popup_table,#pagein_table,#hastalar_table,#customers_table,#service_table,#brand_table,#product_type_table,#product_table").DataTable({
           "language": {
               "emptyTable": "Hiç bir veri bulunamadı",
               "info": "Gösterim _START_ ile _END_ arası _TOTAL_ toplam veri",

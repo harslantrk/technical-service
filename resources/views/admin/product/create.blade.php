@@ -10,117 +10,65 @@
     <small>Ürün Ekle</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
-    <li><a href="/admin/product/urun-ekle"><i class="fa fa-dashboard active"></i> Ürün Ekle</a></li>
+    <li><a href="{{URL::to('/admin')}}"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
+    <li><a href="{{URL::to('/admin/product/')}}">Ürünler</a></li>
+    <li class="active">Tüm Ürünler</li>
   </ol>
 </section>
 <!-- Main content -->
-
-<section class="content">
-<div class="row">
-<div class="col-lg-8 col-md-8">
-<div class="box box-primary">
-  <div class="box-header with-border">
-    <h3 class="box-title">Ürün Ekle</h3>
-  </div><!-- /.box-header -->
-  <!-- form start -->
-  <form role="form" method="post" id="productForm">
-  
-  {!! csrf_field() !!}
-    <div class="box-body">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Ürün Adı</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="" name="name">
-      </div>
-      <div class="form-group">
-            <label for="exampleInputEmail1">Ürün İçeriği</label>
-            <textarea name="content" class="textarea product-text" placeholder="" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-          
-      </div>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <label for="exampleInputEmail1">Ürün Fiyatı</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" placeholder="" name="price">
-          </div>
-          <div class="col-lg-6 col-md-6">
-            <label for="exampleInputEmail1">Ürün Stoğu</label>
-            <input type="number" class="form-control" id="exampleInputEmail1" placeholder="" name="stock">
-          </div>
-        </div>  
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">SEO Açıklama</label>
-        <textarea type="text" class="textarea" style="width:100%;height:250px;resize:none;" id="exampleInputEmail1" placeholder="" name="description"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="exampleInputEmail1">Ürün Galerisi</label>
-        
-      </div>
-
-      </div>
-  
-</div><!-- /.box -->
-</div>
-<div class="col-lg-4 col-md-4">
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">Yayınlama Araçları</h3>
-    </div><!-- /.box-header -->
-    <!-- form start -->
-    
+  <section class="content">
+    <!-- general form elements -->
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Yeni Ürün Ekleme</h3>
+      </div><!-- /.box-header -->
       <div class="box-body">
+      <!-- form start -->
+      <form role="form" method="post" action="{{URL::to('/admin/product/save')}}">
+        {!! csrf_field() !!}
+          <div class="form-group">
+            <label class="control-label">Ürün Adı</label>
+            <input type="text" class="form-control" name="name">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Marka</label>
+            <select name="brand_id" class="select2 form-control">
+              <option selected disabled>Marka Seçiniz</option>
+              @foreach($brands as $brand)
+                <option value="{{$brand->id}}">{{$brand->brand}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Ürün Türü</label>
+            <select name="product_type_id" class="select2 form-control">
+              <option selected disabled>Ürün Türü Seçiniz</option>
+              @foreach($product_types as $product_type)
+                <option value="{{$product_type->id}}">{{$product_type->product_type}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Ürün Açıklaması</label>
+            <textarea class="form-control" style="resize: none;" name="detail"  cols="30" rows="10"></textarea>
+          </div>
         <div class="form-group">
-          <button type="submit" onclick ="return productFormSave();" class="btn btn-primary">Yayınla</button>
-          <button type="submit" onclick ="return productFormDraft();" class="btn btn-warning">Taslağa Kaydet</button>
-        </div>
-
-        <div class="form-group">
-          <h3 class="box-title">Sayfa Düzeni</h3>
-          
-          <label for="exampleInputEmail1">Kategori</label>
-          <select class="form-control" name="">
-            <option>Kategori 1</option>
-            <option>Kategori 2</option>
-            <option>Kategori 3</option>
-            <option>Kategori 4</option>
-            <option>Kategori 5</option>
-          </select>
-          <label for="exampleInputEmail1">Sıralama</label>
-          <input type="number" class="form-control" id="exampleInputEmail1" placeholder="" name="priority">
+          <label class="control-label">Ürün Stoğu</label>
+          <input type="number" class="form-control" name="stock">
         </div>
         <div class="form-group">
-          <h3 class="box-title">Etiketler</h3>
-          <p><small>Kelimeler Arasına Virgül Koyunuz</small></p>
-          <textarea type="text" class="form-control" style="width:100%;height:150px;overflow: hidden; resize:none;"  id="exampleInputEmail1" placeholder="" name="tags"></textarea>
+          <label class="control-label">Ürün Geliş Fiyatı</label>
+          <input type="number" class="form-control" name="in_price">
         </div>
         <div class="form-group">
-          <h3 class="box-title">Öne Çıkarılan Görsel</h3>
-
-          <input name="image" type="file" id="exampleInputFile">
-          
+          <label class="control-label">Ürün Çıkış Fiyatı</label>
+          <input type="number" class="form-control" name="out_price">
         </div>
-        
-
-    </form>
-
-  </div><!-- /.box -->
-</div>
-</div>
-</section><!-- /.content -->
-
-<script type="text/javascript">
-  
-function productFormSave (){
-  $("#productForm").attr("action","/admin/product/product-save");
-}
-
-function productFormDraft (){
-  $("#productForm").attr("action","/admin/product/product-draft");
-}
-</script>
-
-
+        <button type="submit" class="btn btn-primary"><i class="fa fa-hdd-o"></i> Kaydet</button>
+        <a href="{{URL::to('/admin/product/')}}" class="button btn btn-default"><i class="fa fa-undo"></i> Geri</a>
+      </form>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+  </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 @endsection

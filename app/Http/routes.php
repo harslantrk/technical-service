@@ -176,19 +176,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/admin/settings/save','Admin\SettingsController@save');
 	/*Ayarlar Modülü Bitişi*/
 
-    /*Ürünler Modülü Başlangıcı*/
-    Route::get('/admin/product/','Admin\ProductController@index'); //Tüm Ürünler Sayfası
-    Route::get('/admin/product/tum-urunler','Admin\ProductController@index'); //Tüm Ürünler Sayfası
-    Route::get('/admin/product/urun-ekle','Admin\ProductController@create'); //Yeni Ürün Ekleme
-    Route::get('/admin/product/edit-product/{id}','Admin\ProductController@edit');//var olan Ürünün bilgilerini gösteren sayfa
-    Route::get('/admin/product/delete-product/{id}','Admin\ProductController@delete'); //var olan ürünü silen fonksiyon
-    
-    Route::post('/admin/product/update-product','Admin\ProductController@update');//var olan ürünün bilgilerini güncelleyen fonksiyon
-    Route::post('/admin/product/product-save','Admin\ProductController@save');//yeni ürün ekleyen fonksiyon
-    Route::post('/admin/product/draft','Admin\ProductController@draft');//yeni taslak ürün ekleyen fonksiyon
-    Route::post('/admin/product/update/draft','Admin\ProductController@updateDraft');//var olan ürünün bilgilerini güncelleyen fonksiyon
-    /*Ürünler Modülü Bitiş*/
-
     /*TEKNİK-TALEP MODÜLÜ*/
 
     /* ANA SAYFA (GELEN KUTUSU) */
@@ -280,8 +267,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/admin/product_type/save','Admin\Product_TypeController@save'); //Hastayı Kaydetme
     Route::post('/admin/product_type/update/{id}','Admin\Product_TypeController@update'); //Hastayı Kaydetme
+
     //Ürün Türü Modülü Bitiş
 
+    /*Ürünler Modülü Başlangıcı*/
+    Route::get('/admin/product/','Admin\ProductController@index'); //Tüm Ürünler Sayfası
+    Route::get('/admin/product/create','Admin\ProductController@create'); //Yeni Ürün Ekleme
+    Route::get('/admin/product/edit/{id}','Admin\ProductController@edit');//var olan Ürünün bilgilerini gösteren sayfa
+    Route::get('/admin/product/delete/{id}','Admin\ProductController@delete'); //var olan ürünü silen fonksiyon
+
+    Route::post('/admin/product/update/{id}','Admin\ProductController@update');//var olan ürünün bilgilerini güncelleyen fonksiyon
+    Route::post('/admin/product/save','Admin\ProductController@save');//yeni ürün ekleyen fonksiyon
+    Route::post('/admin/product/ImagePostSave','Admin\ProductController@ImagePostSave');
+    /*Ürünler Modülü Bitiş*/
 });
 
 
