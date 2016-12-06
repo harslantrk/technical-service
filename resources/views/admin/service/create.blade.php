@@ -18,90 +18,71 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    HİZMETLER
-    <small>Hizmet Ekle</small>
+    TEKNİK SERVİS
+    <small>Servis Ekle</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i>Ana Sayfa</a></li>
-    <li><a href="/admin/services"><i class="fa fa-dashboard"></i> Hizmetler</a></li>
-    <li><a href="/admin/services/create"><i class="fa fa-dashboard active"></i> Yeni</a></li>
+    <li><a href="{{URL::to('/admin')}}"><i class="fa fa-dashboard"></i>Ana Sayfa</a></li>
+    <li><a href="{{URL::to('/admin/service')}}"><i class="fa fa-dashboard"></i> Servisler</a></li>
   </ol>
 </section>
 <!-- Main content -->
 <section class="content">
         <div class="row">
             <div class="col-md-12">
-            <form method="post" action="/admin/services/save">
+            <form method="post" action="/admin/service/save">
               {!! csrf_field() !!}
               <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Yeni Hizmet</h3>
+                  <h3 class="box-title">Yeni Servis</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                
                   <div class="input-group form-group">
                     <div class="input-group-addon">
-                      Başlık Ekle
+                      Müşteri Seç
                     </div>
-                   <input class="form-control" type="text" name="title">
-                  </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Kısa Açıklama
-                    </div>
-                   <input class="form-control" type="text" name="short_content">
-                  </div>
-
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      İcon Seç
-                    </div>
-                   <input class="form-control" type="text" name="icons">
-                  </div>
-
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Açıklama
-                    </div>
-                   <input class="form-control" type="text" name="description">
+                   <select name="customer_id" class="select2 form-control" style="width: 100%">
+                     <option selected disabled>Müşteri Seçiniz</option>
+                     @foreach($customers as $customer)
+                       <option value="{{$customer->id}}">{{$customer->name}}</option>
+                     @endforeach
+                   </select>
                   </div>
                   <div class="input-group form-group">
                     <div class="input-group-addon">
-                      Anahtar Kelimeler
+                      Ürün Seç
                     </div>
-                   <input class="form-control" type="text" name="keywords" placeholder="Aralara Virgül Koyunuz">
+                    <select name="product_id" class="select2 form-control" style="width: 100%">
+                      <option selected disabled>Ürün Seçiniz</option>
+                      @foreach($products as $product)
+                        <option value="{{$product->id}}">{{$product->name}}</option>
+                      @endforeach
+                    </select>
                   </div>
-                  
                   <div class="input-group form-group">
                     <div class="input-group-addon">
-                      Öncelik
+                      Bildirilen Hata
                     </div>
-                   <input class="form-control" type="text" name="priority">
+                   <input class="form-control" type="text" name="customer_fault" placeholder="Müşteri Tarfından Söylenilen Sorun..">
                   </div>
-                  
-                  <div class="form-group">
-                    <textarea placeholder="Lütfen Hizmetinizi oluşturunuz..." name="content" class="form-control product-text" style="height: 300px">
-                         
-                    </textarea>
-                  </div>
-                  <!--<div class="form-group">
-                    <div class="btn btn-default btn-file">
-                      <i class="fa fa-paperclip"></i> Attachment
-                      <input type="file" name="attachment">
+                  <div class="input-group form-group">
+                    <div class="input-group-addon">
+                      Ürün Emanetleri
                     </div>
-                    <p class="help-block">Max. 32MB</p>
-                  </div>-->
-                  <div class="form-group">
-                      <div class="kv-main"></div>
+                   <input class="form-control" type="text" name="deposit" placeholder="Ürün ile Gelen Eşyalar...">
                   </div>
-                
+                  <div class="input-group form-group">
+                    <div class="input-group-addon">
+                      Garanti
+                    </div>
+                    <input type="radio" name="warranty" class="minimal" value="1"> Var
+                    <input type="radio" name="warranty" class="minimal" value="0"> Yok
+                  </div>
                 </div><!-- /.box-body -->
-                
-              
                 <div class="box-footer">
                   <div class="pull-right">
-                    <a href="/admin/services" class="btn btn-default"><i class="fa fa-pencil"></i> İptal</a>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Gönder</button>
+                    <a href="/admin/service" class="btn btn-default"><i class="fa fa-pencil"></i> İptal</a>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Kaydet</button>
                   </div>
                 </div><!-- /.box-footer -->
 

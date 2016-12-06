@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Brand;
-use App\UserCustomers;
+use App\Customer;
+use App\Product;
+use App\Service;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -22,8 +24,10 @@ class HomeController extends Controller
     }
     public function index()
     {
+        $service = Service::all()->count();
+        $product = Product::all()->count();
         $brand = Brand::all()->count();
-        $customer = UserCustomers::all()->count();
-        return view('admin.home',['brand' => $brand,'customer' => $customer]);
+        $customer = Customer::all()->count();
+        return view('admin.home',['brand' => $brand,'customer' => $customer,'product' => $product,'service' => $service]);
     }
 }

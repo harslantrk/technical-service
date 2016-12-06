@@ -54,7 +54,7 @@ class ModulesSeeder extends Seeder
 
         $modules = new Modules();
         $modules->name = 'Servis';
-        $modules->url = '/admin/services';
+        $modules->url = '/admin/service';
         $modules->icon = 'fa-plus';
         $modules->parent = 0;
         $modules->parent_id = 0;

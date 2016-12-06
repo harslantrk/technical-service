@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Customer;
+use App\Product;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -32,10 +34,7 @@ class ServiceController extends Controller
         if($this->read==0){
             return redirect()->action('Admin\HomeController@index');
         }
-        /*die(Session::get('deneme'));*/
-    	$services = Service::all();
-    	/*$emc_blog_table = DB::getSchemaBuilder()->getColumnListing('emc_blog');
-    	return view('admin.blog.index',['blogs' => $blogs, 'emc_blog_table' => $emc_blog_table]);	*/
+    	$services = Service::where('status',1)->get();
 
     	return view('admin.service.index', ['services' => $services, 'deleg' => $this->sess]);
 
@@ -44,41 +43,27 @@ class ServiceController extends Controller
     	if($this->read==0 || $this->add==0){
             return redirect()->action('Admin\HomeController@index');
         }
-    	return view('admin.service.create');
+        $customers = Customer::where('status',1)->get();
+        $products = Product::where('status',1)->get();
+    	return view('admin.service.create',['customers' => $customers,'products' => $products]);
     }
 
     public function save(Request $request){
-    	$hizmet = new Service();
-        $hizmet->title = $request->input('title');
-        $hizmet['slug']=$request->input('title');
-        $hizmet->description = $request->input('description');
-        $hizmet->content = $request->input('content');
-        $hizmet->short_content = $request->input('short_content');
-        $hizmet->icons = $request->input('icons');
-        $hizmet->keywords = $request->input('keywords');
-        $hizmet->priority = $request->input('priority');
-        $hizmet->status = 1;
-        $hizmet->save();
+    	$data =$request->all();
+    	$data['status'] = 1;
+    	$data['user_id'] = Auth::user()->id;
+    	Service::create($data);
+    	/*echo '<pre>';
+    	print_r($data);
+    	die();*/
     	return redirect('/admin/service');
-    	Flash::message('Hizmet başarılı bir şekilde eklendi.','success');
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $hizmet = Service::find($request->input('id'));
-        $hizmet->title = $request->input('title');
-        $hizmet['slug']=str_slug($request->input('title'));
-        $hizmet->description = $request->input('description');
-        $hizmet->content = $request->input('content');
-        $hizmet->short_content = $request->input('short_content');
-        $hizmet->icons = $request->input('icons');
-        $hizmet->keywords = $request->input('keywords');
-        $hizmet->priority = $request->input('priority');
-        $hizmet->status = 1;
-        $hizmet->save();
-		
+        $data = $request->all();
+        Service::find($id)->update($data);
         return redirect('/admin/service');
-        Flash::message('Hizmet başarılı bir şekilde güncellendi.','success');
     }
 
     public function edit($id)
@@ -86,20 +71,25 @@ class ServiceController extends Controller
         if($this->read==0 || $this->update==0){
             return redirect()->back();
         }
-        $allService = Service::all();
-        $services = Service::find($id);
-        return view('admin.service.edit',['services' => $services, 'allService' => $allService]);
+        $service = Service::where('id',$id)->first();
+        $customers = Customer::where('status',1)->get();
+        $products = Product::where('status',1)->get();
+        return view('admin.service.edit',['service' => $service,'customers' => $customers,'products' => $products]);
     }
-
-    
 
     public function delete($id) {
     	if ($this->read==0 || $this->delete==0) {
     		return redirect()->action('Admin\HomeController@index');
     	}
     	$services=Service::find($id);
-    	$services->status=0;
+    	$services->status = 0;
     	$services->save();
-    	return redirect()->back();
+        return redirect('/admin/service');
+    }
+    public function serviceClose($id){
+        $service = Service::find($id);
+        $service['status'] = 2;
+        $service->save();
+        return redirect('/admin/service');
     }
 }

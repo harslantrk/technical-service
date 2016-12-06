@@ -48,26 +48,26 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
-          <p>Bekleyen İşlemlerim</p>
+          <h3>{{$product}}</h3>
+          <p>Adet Ürün</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">Tüm Bekleyen İşlemlerim <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{URL::to('/admin/product')}}" class="small-box-footer">Tüm Ürünler <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
     <div class="col-lg-3 col-xs-6">
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
-          <p>Mesajlar</p>
+          <h3>{{$service}}</h3>
+          <p>Adet Servis Girişi</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="#" class="small-box-footer">Tüm Mesajlar <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{URL::to('/admin/service')}}" class="small-box-footer">Tüm Mesajlar <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
   </div><!-- /.row -->

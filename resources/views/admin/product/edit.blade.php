@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
               <label class="control-label">Marka</label>
-              <select name="brand_id" class="select2 form-control">
+              <select name="brand_id" class="select2 form-control" style="width: 100%;">
                 <option disabled>Marka Seçiniz</option>
                 @foreach($brands as $brand)
                   @if($product->id == $brand->id)
@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
               <label class="control-label">Ürün Türü</label>
-              <select name="product_type_id" class="select2 form-control">
+              <select name="product_type_id" class="select2 form-control" style="width: 100%;">
                 <option disabled>Ürün Türü Seçiniz</option>
                 @foreach($product_types as $product_type)
                   @if($product->id == $product_type->id)

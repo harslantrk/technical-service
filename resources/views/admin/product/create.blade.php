@@ -32,7 +32,7 @@
           </div>
           <div class="form-group">
             <label class="control-label">Marka</label>
-            <select name="brand_id" class="select2 form-control">
+            <select name="brand_id" class="select2 form-control" style="width: 100%;">
               <option selected disabled>Marka Seçiniz</option>
               @foreach($brands as $brand)
                 <option value="{{$brand->id}}">{{$brand->brand}}</option>
@@ -41,7 +41,7 @@
           </div>
           <div class="form-group">
             <label class="control-label">Ürün Türü</label>
-            <select name="product_type_id" class="select2 form-control">
+            <select name="product_type_id" class="select2 form-control" style="width: 100%;">
               <option selected disabled>Ürün Türü Seçiniz</option>
               @foreach($product_types as $product_type)
                 <option value="{{$product_type->id}}">{{$product_type->product_type}}</option>

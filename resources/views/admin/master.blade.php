@@ -753,6 +753,27 @@
                   }
               });
       }
+      function serviceClose(link) {
+          swal({
+                  title: "Servisi Sonlandırmak istediğinize emin misiniz?",
+                  text: "Eğer Sonlandırırsanız, veriye bir daha ulaşamayacağınızı onaylamış olursunuz!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Servisi Sonlandır!",
+                  cancelButtonText: "Servisi Sonlandırma!",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+              },
+              function(isConfirm){
+                  if (isConfirm) {
+                      swal("Kapatıldı!", "Servis başarılı bir şekilde Kapatıldı.", "success");
+                      location.href = link;
+                  } else {
+                      swal("İptal Edildi", "Servise herhangi bir işlem yapılmadı.", "error");
+                  }
+              });
+      }
       function updateApprove() {
           swal({
                   title: "İşlem Başarılı",

@@ -8,13 +8,13 @@ use Auth;
 use Laracasts\Flash\Flash;
 use App\Http\Requests;
 use DB;
-use App\UserCustomers;
+use App\Customer;
 use App\UserDelegation;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
-class UserCustomersController extends Controller
+class CustomerController extends Controller
 {
     //Hizmetlerimiz Listeleme
     public function __construct(Request $request)
@@ -33,7 +33,7 @@ class UserCustomersController extends Controller
         if($this->read==0){
             return redirect()->action('Admin\HomeController@index');
         }
-   		$data=UserCustomers::where('status','1')->get();
+   		$data=Customer::where('status','1')->get();
 
    		return view('admin.customers.index',['data'=>$data,'deleg' => $this->sess]);
    	}
@@ -48,17 +48,17 @@ class UserCustomersController extends Controller
          $data=$request->all();
 
          $data['status']='1';
-         
-         UserCustomers::create($data);
 
-          return redirect()->action('Admin\UserCustomersController@index');
+          Customer::create($data);
+
+          return redirect('admin.customers');
       }
 
     public function edit($id){
         if($this->read==0 || $this->update==0){
             return redirect()->action('Admin\HomeController@index');
         }
-        $customers = UserCustomers::where('id',$id)->first();
+        $customers = Customer::where('id',$id)->first();
 
         return view('admin.customers.edit',['customers'=>$customers]);
     }
@@ -66,16 +66,16 @@ class UserCustomersController extends Controller
       public function update(Request $request){
          $data=$request->all();
 
-         UserCustomers::find($data['id'])->update($data);
+          Customer::find($data['id'])->update($data);
           Flash::message('Tamam','success');//Güncelleme İşleminde Uyarı Verdirtme
-          return redirect()->action('Admin\UserCustomersController@index');
+          return redirect('admin.customers');
       }
 
       public function delete($delete_id){
           if($this->read==0 || $this->delete==0){
               return redirect()->action('Admin\HomeController@index');
           }
-         $customers = UserCustomers::where('id', $delete_id)->first();
+         $customers = Customer::where('id', $delete_id)->first();
           $customers->status = '0';
           $customers->save();
 

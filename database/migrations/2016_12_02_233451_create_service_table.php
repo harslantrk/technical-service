@@ -12,18 +12,18 @@ class CreateServiceTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('service', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->string('slug');
-            $table->string('description');
-            $table->text('content');
-            $table->text('short_content');
-            $table->text('image');
-            $table->text('icons');
-            $table->string('keywords');
-            $table->integer('priority');
-            $table->integer('status');
+            $table->integer('customer_id');
+            $table->integer('product_id');
+            $table->integer('user_id');
+            $table->text('customer_fault');
+            $table->text('process');
+            $table->text('process_proposal');
+            $table->text('deposit');
+            $table->enum('warranty',array('0','1'));
+            $table->enum('status',array('0','1','2'));
+            $table->enum('service_detail',array('0','1','2','3'));
             $table->timestamps();
         });
     }
@@ -35,6 +35,6 @@ class CreateServiceTable extends Migration
      */
     public function down()
     {
-        Schema::drop('services');
+        Schema::drop('service');
     }
 }

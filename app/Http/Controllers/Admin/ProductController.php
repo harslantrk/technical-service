@@ -33,7 +33,7 @@ class ProductController extends Controller
             return redirect()->action('Admin\HomeController@index');
         }
     	//$products = Product::all();
-        $products = Product::where('status',1)->get();
+        $products = Product::where('status',1)->orderBy('id','desc')->get();
     	return view('admin.product.index')->with(['products' => $products,'deleg' => $this->sess]);
     }
     //Yeni Ürünler
@@ -72,7 +72,7 @@ class ProductController extends Controller
         /*echo '<pre>';
         print_r($product->id);
         die();*/
-    	return redirect('/admin/product');
+    	return redirect('/admin/product/edit/'.$product->id);
     }
 
     public function edit(Request $request){

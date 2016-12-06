@@ -65,9 +65,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/service/create','Admin\ServiceController@create');
     Route::get('/admin/service/edit/{id}','Admin\ServiceController@edit');
     Route::get('/admin/service/delete/{id}','Admin\ServiceController@delete');
+    Route::get('/admin/service/serviceClose/{id}','Admin\ServiceController@serviceClose');
 
     Route::post('/admin/service/save','Admin\ServiceController@save');
-    Route::post('/admin/service/update','Admin\ServiceController@update');
+    Route::post('/admin/service/update/{id}','Admin\ServiceController@update');
+
 
     /*Hizmetler Modülü Bitiş*/
 
@@ -216,13 +218,13 @@ Route::group(['middleware' => ['auth']], function () {
     //Yetkilendirme Modülü Son
 
     //Kullanıcılar Modülü
-    Route::get('/admin/customers','Admin\UserCustomersController@index');
-    Route::get('/admin/customers/create','Admin\UserCustomersController@create');
-    Route::get('/admin/customers/edit/{id}','Admin\UserCustomersController@edit');
-    Route::get('/admin/customers/delete/{delete_id}','Admin\UserCustomersController@delete');
+    Route::get('/admin/customers','Admin\CustomerController@index');
+    Route::get('/admin/customers/create','Admin\CustomerController@create');
+    Route::get('/admin/customers/edit/{id}','Admin\CustomerController@edit');
+    Route::get('/admin/customers/delete/{delete_id}','Admin\CustomerController@delete');
 
-    Route::post('admin/customers/save','Admin\UserCustomersController@save');
-    Route::post('/admin/customers/update','Admin\UserCustomersController@update');
+    Route::post('admin/customers/save','Admin\CustomerController@save');
+    Route::post('/admin/customers/update','Admin\CustomerController@update');
     //Kullanıcılar Modülü Son
 
     // Modüller Modülü
