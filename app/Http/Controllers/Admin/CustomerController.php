@@ -51,7 +51,7 @@ class CustomerController extends Controller
 
           Customer::create($data);
 
-          return redirect('admin.customers');
+          return redirect('admin/customers');
       }
 
     public function edit($id){
@@ -68,7 +68,7 @@ class CustomerController extends Controller
 
           Customer::find($data['id'])->update($data);
           Flash::message('Tamam','success');//Güncelleme İşleminde Uyarı Verdirtme
-          return redirect('admin.customers');
+          return redirect('admin/customers');
       }
 
       public function delete($delete_id){

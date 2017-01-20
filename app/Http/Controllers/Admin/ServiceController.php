@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Customer;
 use App\Product;
+use App\ServicePayment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -91,5 +92,23 @@ class ServiceController extends Controller
         $service['status'] = 2;
         $service->save();
         return redirect('/admin/service');
+    }
+    public function PaymentView($id){
+        $service_payments = ServicePayment::where('service_id',$id)->get();
+        $service = Service::where('id',$id)->first();
+        $products = Product::where('status',1)->get();
+        return view('admin.service.paymentModal',['service_id' => $id,'products' => $products,'service' => $service,'service_payments' => $service_payments]);
+    }
+    public function AddPayment(Request $request,$id){
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $data['service_id'] = $id;
+        /*echo '<pre>';
+        print_r($data);
+        die();*/
+
+        ServicePayment::create($data);
+        return redirect()->back();
+
     }
 }

@@ -59,20 +59,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/files','Admin\FilesController@index'); // Tüm Dosyalar
     Route::post('/admin/files/single-upload','Admin\FilesController@singleUpload');
 
-    /*Hizmetler Modülü Başlangıç*/
-
-    Route::get('/admin/service','Admin\ServiceController@index');
-    Route::get('/admin/service/create','Admin\ServiceController@create');
-    Route::get('/admin/service/edit/{id}','Admin\ServiceController@edit');
-    Route::get('/admin/service/delete/{id}','Admin\ServiceController@delete');
-    Route::get('/admin/service/serviceClose/{id}','Admin\ServiceController@serviceClose');
-
-    Route::post('/admin/service/save','Admin\ServiceController@save');
-    Route::post('/admin/service/update/{id}','Admin\ServiceController@update');
-
-
-    /*Hizmetler Modülü Bitiş*/
-
     /*Müşteri Yorumları Modülü Başlangıç*/
 
     Route::get('/admin/our-client','Admin\OurClientsController@index');
@@ -282,6 +268,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/product/save','Admin\ProductController@save');//yeni ürün ekleyen fonksiyon
     Route::post('/admin/product/ImagePostSave','Admin\ProductController@ImagePostSave');
     /*Ürünler Modülü Bitiş*/
+
+    // Servis Modülü Başlangıç
+    Route::get('/admin/service','Admin\ServiceController@index');
+    Route::get('/admin/service/create','Admin\ServiceController@create');
+    Route::get('/admin/service/edit/{id}','Admin\ServiceController@edit');
+    Route::get('/admin/service/delete/{id}','Admin\ServiceController@delete');
+    Route::get('/admin/service/serviceClose/{id}','Admin\ServiceController@serviceClose');
+    Route::get('/admin/service/paymentModalView/{id}','Admin\ServiceController@PaymentView');
+
+    Route::post('/admin/service/save','Admin\ServiceController@save');
+    Route::post('/admin/service/update/{id}','Admin\ServiceController@update');
+    Route::post('/admin/service/AddPayment/{id}','Admin\ServiceController@AddPayment');
+    // Servis Modülü Bitiş
 });
 
 

@@ -569,7 +569,7 @@
       </aside>
 
       @yield('content')
-      <footer class="main-footer">
+      <footer class="main-footer non-print">
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.3.0
         </div>

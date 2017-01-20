@@ -24,10 +24,12 @@ class HomeController extends Controller
     }
     public function index()
     {
+        $five_services = Service::where('status',1)->orderBy('id','desc')->take(5)->get(); // Son 5 kayıt
+        $five_customers = Customer::where('status',1)->orderBy('id','desc')->take(5)->get(); // Son 5 kayıt
         $service = Service::all()->count();
         $product = Product::all()->count();
         $brand = Brand::all()->count();
         $customer = Customer::all()->count();
-        return view('admin.home',['brand' => $brand,'customer' => $customer,'product' => $product,'service' => $service]);
+        return view('admin.home',['brand' => $brand,'customer' => $customer,'product' => $product,'service' => $service,'five_services' => $five_services,'five_customers' => $five_customers]);
     }
 }

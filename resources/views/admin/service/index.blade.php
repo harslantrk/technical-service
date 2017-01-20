@@ -56,7 +56,10 @@
                             <td>
                                 @if($deleg['u']==1)<a href="/admin/service/edit/{{$service->id}}" class="button btn btn-success"><i class="fa fa-edit"></i></a>@endif
                                 @if($deleg['d']==1)<a onclick="deleteApprove('/admin/service/delete/{{$service->id}}')" class="button btn btn-danger"><i class="fa fa-trash"></i></a>@endif
-                                <a onclick="serviceClose('/admin/service/serviceClose/{{$service->id}}')" title="Servisi Kapat !" class="button btn btn-default"><i class="fa fa-close"></i></a>
+                                @if($service->process)
+                                  <a onclick="serviceClose('/admin/service/serviceClose/{{$service->id}}')" title="Servisi Kapat !" class="button btn btn-default"><i class="fa fa-close"></i></a>
+                                  <a href="{{URL::to('/admin/service/paymentModalView/'.$service->id)}}" title="Ücret Girişi !" class="button btn btn-default try"><i class="fa fa-try"></i></a>
+                                @endif
                             </td>
                             </tr>
                           <?php $no++;?>

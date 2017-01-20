@@ -67,7 +67,7 @@
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="{{URL::to('/admin/service')}}" class="small-box-footer">Tüm Mesajlar <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="{{URL::to('/admin/service')}}" class="small-box-footer">Tüm Teknik Servis Girişleri <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div><!-- ./col -->
   </div><!-- /.row -->
@@ -76,7 +76,7 @@
     <div class="col-sm-6">
       <div class="box box-info">
         <div class="box-header with-border">
-          <h3 class="box-title">Son Gönderilen Sms</h3>
+          <h3 class="box-title">Son Eklenen 5 Servis</h3>
           <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -87,14 +87,21 @@
             <table class="table no-margin">
               <thead>
               <tr>
+                <th>Servis No</th>
+                <th>Müşteri</th>
+                <th>Ürün</th>
                 <th>Tarih</th>
-                <th>Gönderilen Numara</th>
-                <th>Sms İçeriği</th>
               </tr>
               </thead>
               <tbody>
+              @foreach($five_services as $five_service)
               <tr>
+                <td>{{$five_service->id}}</td>
+                <td>{{$five_service->customer->name}}</td>
+                <td>{{$five_service->product->name}}</td>
+                <td>{{\Carbon\Carbon::parse($five_service->created_at)->format('d/m/Y')}}</td>
               </tr>
+                @endforeach
               </tbody>
             </table>
           </div><!-- /.table-responsive -->
@@ -104,7 +111,7 @@
     <div class="col-sm-6">
       <div class="box box-warning">
         <div class="box-header with-border">
-          <h3 class="box-title">Son Kaydedilen Hasta</h3>
+          <h3 class="box-title">Son Eklenen 5 Müşteri</h3>
           <div class="box-tools pull-right">
             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -122,8 +129,14 @@
               </tr>
               </thead>
               <tbody>
+              @foreach($five_customers as $five_customer)
               <tr>
+                <td>{{$five_customer->name}}</td>
+                <td>{{$five_customer->gsm}}</td>
+                <td>{{\Carbon\Carbon::parse($five_customer->created_at)->format('d/m/Y')}}</td>
+                <td>{{$five_customer->adres}}</td>
               </tr>
+              @endforeach
               </tbody>
             </table>
           </div><!-- /.table-responsive -->
@@ -238,7 +251,7 @@
           </ul>
         </div><!-- /.box-body -->
         <div class="box-footer clearfix no-border">
-          <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+          <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Duyuru Ekle</button>
         </div>
       </div><!-- /.box -->
     </section><!-- /.Left col -->

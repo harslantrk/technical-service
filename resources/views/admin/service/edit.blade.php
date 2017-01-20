@@ -5,6 +5,11 @@
     .input-group-addon {
       min-width: 130px;
     }
+    @media print{
+      .non-print{
+        display: none;
+      }
+    }
   </style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -35,6 +40,11 @@
             <div class="box box-primary">
               <div class="box-header with-border">
                 <h3 class="box-title">{{$service->id}} Numaralı Servis</h3>
+                @if($service->process)
+                  <div class="pull-right">
+                    <a href="{{URL::to('/admin/service/paymentModalView/'.$service->id)}}" class="btn btn-danger"><i class="fa fa-try"></i> Ücret Girişi</a>
+                  </div>
+                  @endif
               </div><!-- /.box-header -->
               <div class="box-body">
                 <div class="input-group form-group">
@@ -101,15 +111,18 @@
               </div><!-- /.box-body -->
               <div class="box-footer">
                 <div class="pull-right">
-                  <a href="/admin/service" class="btn btn-default"><i class="fa fa-pencil"></i> İptal</a>
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Güncelle</button>
+                  <a href="{{URL::to('/admin/service')}}" class="btn btn-default non-print"><i class="fa fa-pencil"></i> İptal</a>
+                  <button type="submit" class="btn btn-primary non-print"><i class="fa fa-envelope-o"></i> Güncelle</button>
+                  <a onclick="window.print()" class="btn btn-success non-print" data-toggle="modal" data-target="#modalPrint"><i class="fa fa-print"></i> Yazdır</a>
                 </div>
               </div><!-- /.box-footer -->
-
             </div><!-- /. box -->
           </form>
         </div><!-- /.col -->
       </div><!-- ./row -->
     </section><!-- /.content -->
   </div><!-- /.content-wrapper -->
+  <div class="modal fade" id="ServicePayment" tabindex="-1" role="dialog">
+
+  </div><!-- /.modal -->
 @endsection
