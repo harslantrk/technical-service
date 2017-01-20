@@ -104,4 +104,13 @@ class ProductController extends Controller
 		return redirect('/admin/product');
     }
 
+    public function show($id)
+    {
+        $products = Product::where('id',$id)->first();
+        $brands = Brand::where('status',1)->get();
+        $product_types = Product_Type::where('status',1)->get();
+
+        return view('admin.product.show',['products' => $products,'brands' => $brands,'product_types' => $product_types]);
+    }
+
 }

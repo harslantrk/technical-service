@@ -263,6 +263,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/product/create','Admin\ProductController@create'); //Yeni Ürün Ekleme
     Route::get('/admin/product/edit/{id}','Admin\ProductController@edit');//var olan Ürünün bilgilerini gösteren sayfa
     Route::get('/admin/product/delete/{id}','Admin\ProductController@delete'); //var olan ürünü silen fonksiyon
+    Route::get('/admin/product/show/{id}','Admin\ProductController@show'); //var olan ürünü silen fonksiyon
 
     Route::post('/admin/product/update/{id}','Admin\ProductController@update');//var olan ürünün bilgilerini güncelleyen fonksiyon
     Route::post('/admin/product/save','Admin\ProductController@save');//yeni ürün ekleyen fonksiyon
