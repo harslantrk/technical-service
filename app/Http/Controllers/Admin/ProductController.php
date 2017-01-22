@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Brand;
+use App\Comment;
 use App\Http\Requests;
 use App\Product_Type;
 use Illuminate\Http\Request;
@@ -109,8 +110,53 @@ class ProductController extends Controller
         $products = Product::where('id',$id)->first();
         $brands = Brand::where('status',1)->get();
         $product_types = Product_Type::where('status',1)->get();
+        $comments = Comment::where('status',1)->where('product_id',$id)->get();
 
-        return view('admin.product.show',['products' => $products,'brands' => $brands,'product_types' => $product_types]);
+        /*echo '<pre>';
+        print_r($comments);
+        die();*/
+
+        return view('admin.product.show',['products' => $products,'brands' => $brands,'product_types' => $product_types,'comments'=>$comments]);
+    }
+
+    public function commentThoughtSave(Request $request)
+    {
+        $data = $request->all();
+        $count = Comment::where('id',$data['comment_id'])->first();
+        $usersCom = $count->users_comment;
+        $usersCom = json_decode($usersCom);
+        foreach($usersCom as $key=>$value)
+        {
+            $newUsersCom[$key] = $value;
+        }
+        $newUsersCom[Auth::user()->id] = Auth::user()->id;
+        /*echo '<pre>';
+        print_r($newUsersCom);
+        die();*/
+        if ($data['thought']==0) {
+            Comment::where('id',$data['comment_id'])->update(['negative_comment'=>$count->negative_comment+1,'users_comment'=>json_encode($newUsersCom)]);
+        }else{
+            Comment::where('id',$data['comment_id'])->update(['positive_comment'=>$count->positive_comment+1,'users_comment'=>json_encode($newUsersCom)]);
+        }
+
+        return redirect()->back();
+    }
+
+    public function commentSave(Request $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $data['users_comment'] ='{}';
+        Comment::create($data);
+
+        return redirect()->back();
+    }
+
+    public function commentCheck($id)
+    {
+        Comment::where('id',$id)->update(['status'=>1]);
+
+        return redirect()->back();
     }
 
 }

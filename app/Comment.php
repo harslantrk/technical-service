@@ -11,8 +11,18 @@ class Comment extends Model
      *
      * @var array
      */
-    protected $table = "emc_comments";
+    protected $table = "comment";
     protected $fillable = [
-        'user_id', 'type_id', 'comment', 'status',  'type',
+        'product_id','user_id','status','positive_comment', 'negative_comment','comment','users_idea'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

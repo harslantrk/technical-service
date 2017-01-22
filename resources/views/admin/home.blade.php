@@ -152,107 +152,40 @@
       <div class="box box-primary">
         <div class="box-header">
           <i class="ion ion-clipboard"></i>
-          <h3 class="box-title">Duyurular</h3>
-          <div class="box-tools pull-right">
-            <ul class="pagination pagination-sm inline">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+          <h3 class="box-title">Yapılan Yorumlar</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
-          <ul class="todo-list">
-            <li>
-              <!-- drag handle -->
-              <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
-              </span>
-              <!-- checkbox -->
-              <input type="checkbox" value="" name="">
-              <!-- todo text -->
-              <span class="text">Design a nice theme</span>
-              <!-- Emphasis label -->
-              <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-              <!-- General tools such as edit or delete-->
-              <div class="tools">
-                <i class="fa fa-edit"></i>
-                <i class="fa fa-trash-o"></i>
-              </div>
-            </li>
-            <li>
-              <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
-              </span>
-              <input type="checkbox" value="" name="">
-              <span class="text">Make the theme responsive</span>
-              <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-              <div class="tools">
-                <i class="fa fa-edit"></i>
-                <i class="fa fa-trash-o"></i>
-              </div>
-            </li>
-            <li>
-              <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
-              </span>
-              <input type="checkbox" value="" name="">
-              <span class="text">Let theme shine like a star</span>
-              <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-              <div class="tools">
-                <i class="fa fa-edit"></i>
-                <i class="fa fa-trash-o"></i>
-              </div>
-            </li>
-            <li>
-              <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
-              </span>
-              <input type="checkbox" value="" name="">
-              <span class="text">Let theme shine like a star</span>
-              <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-              <div class="tools">
-                <i class="fa fa-edit"></i>
-                <i class="fa fa-trash-o"></i>
-              </div>
-            </li>
-            <li>
-              <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
-              </span>
-              <input type="checkbox" value="" name="">
-              <span class="text">Check your messages and notifications</span>
-              <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-              <div class="tools">
-                <i class="fa fa-edit"></i>
-                <i class="fa fa-trash-o"></i>
-              </div>
-            </li>
-            <li>
-              <span class="handle">
-                <i class="fa fa-ellipsis-v"></i>
-                <i class="fa fa-ellipsis-v"></i>
-              </span>
-              <input type="checkbox" value="" name="">
-              <span class="text">Let theme shine like a star</span>
-              <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-              <div class="tools">
-                <i class="fa fa-edit"></i>
-                <i class="fa fa-trash-o"></i>
-              </div>
-            </li>
-          </ul>
+          <table id="product_table" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <td>#</td>
+              <td>Ürün Adı</td>
+              <td>Yorumu Yapan</td>
+              <td>Yorum</td>
+              <td>Son Güncelleme</td>
+              <td>İşlemler</td>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $sira = 1;?>
+            @foreach($comments as $comment)
+              <tr>
+                <th>{{$sira}}</th>
+                <th>{{$comment->product->name}}</th>
+                <th>{{$comment->user->name}}</th>
+                <th>{{$comment->comment}}</th>
+                <th>{{\Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i')}}</th>
+                <th>
+                  <a title="Onayla" href="/admin/product/commentCheck/{{$comment->id}}" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
+                </th>
+              </tr>
+              <?php $sira++;?>
+            @endforeach
+            <!-- Modal -->
+            </tbody>
+            <!-- Trigger the modal with a button -->
+          </table>
         </div><!-- /.box-body -->
-        <div class="box-footer clearfix no-border">
-          <button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Duyuru Ekle</button>
-        </div>
       </div><!-- /.box -->
     </section><!-- /.Left col -->
     <!-- right col (We are only adding the ID to make the widgets sortable)-->

@@ -264,10 +264,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/product/edit/{id}','Admin\ProductController@edit');//var olan Ürünün bilgilerini gösteren sayfa
     Route::get('/admin/product/delete/{id}','Admin\ProductController@delete'); //var olan ürünü silen fonksiyon
     Route::get('/admin/product/show/{id}','Admin\ProductController@show'); //var olan ürünü silen fonksiyon
+    Route::get('/admin/product/commentCheck/{id}','Admin\ProductController@commentCheck'); //Ürün Yorumunu Onaylama
 
     Route::post('/admin/product/update/{id}','Admin\ProductController@update');//var olan ürünün bilgilerini güncelleyen fonksiyon
     Route::post('/admin/product/save','Admin\ProductController@save');//yeni ürün ekleyen fonksiyon
     Route::post('/admin/product/ImagePostSave','Admin\ProductController@ImagePostSave');
+    Route::post('/admin/product/commentThought','Admin\ProductController@commentThoughtSave');//Ürün İçin Yoruma Olumlu Olumsuz Ekleme
+    Route::post('/admin/product/commentSave','Admin\ProductController@commentSave');
     /*Ürünler Modülü Bitiş*/
 
     // Servis Modülü Başlangıç
@@ -282,6 +285,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/service/update/{id}','Admin\ServiceController@update');
     Route::post('/admin/service/AddPayment/{id}','Admin\ServiceController@AddPayment');
     // Servis Modülü Bitiş
+
+
 });
 
 

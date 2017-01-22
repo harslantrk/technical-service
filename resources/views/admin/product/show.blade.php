@@ -83,14 +83,126 @@
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+            <div class="box box-widget">
+                <div class="box-header with-border">
+                    <div class="user-block">
+                        <h3>Ürün Yorumları</h3>
+                    </div><!-- /.user-block -->
+                    <div class="box-tools">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        <button class="btn btn-box-tool" data-widget="remove" title="Kapat"><i class="fa fa-times"></i></button>
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+                <div class="box-footer box-comments" style="display: block;">
+                    @if($comments->count()>0)
+                        @foreach($comments as $comment)
+                            <div class="box-comment">
+                                <!-- User image -->
+                                @if($comment->user->picture)
+                                    <img class="img-responsive img-circle img-sm" src="{{$comment->user->picture}}" alt="alt text">
+                                @else
+                                    <img class="img-responsive img-circle img-sm" src="{{URL::to('/img/avatar.png')}}" alt="alt text">
+                                @endif
+                                <div class="comment-text">
+                              <span class="username">
+                                {{$comment->user->name}}
+                                <span class="text-muted pull-right">{{\Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i')}}</span>
+                              </span><!-- /.username -->
+                                   {{$comment->comment}}
+                                </div><!-- /.comment-text -->
+                                <div id="commentThought">
+                                    <?php
+                                    $usersCom = $comment->users_comment;
+                                    $usersCom = json_decode($usersCom);
+                                    $gizle = "";
+                                    foreach($usersCom as $key=>$value)
+                                    {
+                                        if ($value == \Illuminate\Support\Facades\Auth::user()->id) {
+                                            $gizle=1;
+                                        }
+                                    }
+                                    ?>
+                                    @if($gizle != 1)
+                                            <button class="btn btn-danger btn-xs thought" data-id="{{$comment->id}}" id="0"><i class="fa fa-thumbs-o-down"></i> Olumsuz</button>
+                                            <button class="btn btn-success btn-xs thought" data-id="{{$comment->id}}" id="1"><i class="fa fa-thumbs-o-up"></i> Olumlu</button>
+                                        @endif
+                                </div>
+                            </div><!-- /.box-comment -->
+                            @endforeach
+                        @else
+                        <h3>Henüz Yorum Yapılmamış. İlk Yorumu Yapan Siz Olun.</h3>
+                        @endif
+                </div><!-- /.box-footer -->
+                <div class="box-footer" style="display: block;">
+                        @if(Auth::user()->picture)
+                            <img class="img-responsive img-circle img-sm" src="{{Auth::user()->picture}}" alt="alt text">
+                            @else
+                            <img class="img-responsive img-circle img-sm" src="{{URL::to('/img/avatar.png')}}" alt="alt text">
+                            @endif
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push">
+                            <input type="text" id="yorumText" onkeydown="uniKeyCode(event)" class="form-control input-sm" placeholder="Yorumu Göndermek İçin Enter'a Basınız...">
+                        </div>
+                </div><!-- /.box-footer -->
+            </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-
     <script type="text/javascript">
+        //form içindeki elementleri kapatma
+        // ara inputunu aldıgından dolayı 2 den baslıyor
         var a = $('#kapat >div textarea,input,select');
-        for(var i=2;i<a.length;i++){
+        for(var i=2;i<9;i++){
             console.log('asd');
             a[i].setAttribute('disabled','');
+        }
+        $('.thought').click(function () {
+            var parent = this.parentNode;
+            parent.style.display='none';
+            console.log(this.parentNode);
+            var thought = $(this).attr('id');
+            var comment_id =  $(this).attr('data-id');
+            console.log(thought + '-' +comment_id);
+            $.ajax({
+             url: '/admin/product/commentThought',
+             type: 'POST',
+             beforeSend: function (xhr) {
+             var token = $('meta[name="csrf_token"]').attr('content');
+
+             if (token) {
+             return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+             }
+             },
+             cache: false,
+             data: {thought:thought,comment_id:comment_id},
+             success: function(data){
+                 location.reload();
+             },
+             error: function(jqXHR, textStatus, err){}
+             });
+        });
+        function uniKeyCode(event) {
+            if(event.keyCode==13){
+                var comment = $('#yorumText').val();
+                var product_id = '{{$products->id}}';
+                $.ajax({
+                    url: '/admin/product/commentSave',
+                    type: 'POST',
+                    beforeSend: function (xhr) {
+                        var token = $('meta[name="csrf_token"]').attr('content');
+
+                        if (token) {
+                            return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                        }
+                    },
+                    cache: false,
+                    data: {comment:comment,product_id:product_id},
+                    success: function(data){
+                        location.reload();
+                    },
+                    error: function(jqXHR, textStatus, err){}
+                });
+
+            }
         }
     </script>
 @endsection

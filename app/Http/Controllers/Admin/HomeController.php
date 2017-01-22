@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Brand;
+use App\Comment;
 use App\Customer;
 use App\Product;
 use App\Service;
@@ -30,6 +31,7 @@ class HomeController extends Controller
         $product = Product::all()->count();
         $brand = Brand::all()->count();
         $customer = Customer::all()->count();
-        return view('admin.home',['brand' => $brand,'customer' => $customer,'product' => $product,'service' => $service,'five_services' => $five_services,'five_customers' => $five_customers]);
+        $comments = Comment::where('status',0)->orderBy('id','desc')->get();
+        return view('admin.home',['brand' => $brand,'customer' => $customer,'product' => $product,'service' => $service,'five_services' => $five_services,'five_customers' => $five_customers,'comments'=>$comments]);
     }
 }
