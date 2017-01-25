@@ -32,6 +32,14 @@ class HomeController extends Controller
         $brand = Brand::all()->count();
         $customer = Customer::all()->count();
         $comments = Comment::where('status',0)->orderBy('id','desc')->get();
-        return view('admin.home',['brand' => $brand,'customer' => $customer,'product' => $product,'service' => $service,'five_services' => $five_services,'five_customers' => $five_customers,'comments'=>$comments]);
+        return view('admin.home',[
+            'brand' => $brand,
+            'customer' => $customer,
+            'product' => $product,
+            'service' => $service,
+            'five_services' => $five_services,
+            'five_customers' => $five_customers,
+            'comments'=>$comments
+        ]);
     }
 }

@@ -31,7 +31,10 @@ class BrandController extends Controller
 
         $brands = Brand::all();
 
-        return view('admin.brand.index', ['brands' => $brands, 'deleg' => $this->sess]);
+        return view('admin.brand.index', [
+            'brands' => $brands,
+            'deleg' => $this->sess
+        ]);
 
     }
     public function create(){

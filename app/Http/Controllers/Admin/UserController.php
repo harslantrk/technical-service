@@ -99,7 +99,13 @@ class UserController extends Controller
         }
         else
         {
-            $social = json_decode(json_encode(array('facebook' => ' ', 'twitter' => ' ', 'instagram' => ' ', 'google_plus' => ' ', 'youtube' => ' ')));
+            $social = json_decode(json_encode(array(
+                'facebook' => ' ',
+                'twitter' => ' ',
+                'instagram' => ' ',
+                'google_plus' => ' ',
+                'youtube' => ' '))
+            );
         }
 
     	return view('admin.users.edit')->with(['users' => $users, 'social' => $social]);

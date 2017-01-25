@@ -37,7 +37,10 @@ class ServiceController extends Controller
         }
     	$services = Service::where('status',1)->get();
 
-    	return view('admin.service.index', ['services' => $services, 'deleg' => $this->sess]);
+    	return view('admin.service.index', [
+    	    'services' => $services,
+            'deleg' => $this->sess
+        ]);
 
     }
     public function create(){
@@ -46,7 +49,10 @@ class ServiceController extends Controller
         }
         $customers = Customer::where('status',1)->get();
         $products = Product::where('status',1)->get();
-    	return view('admin.service.create',['customers' => $customers,'products' => $products]);
+    	return view('admin.service.create',[
+    	    'customers' => $customers,
+            'products' => $products
+        ]);
     }
 
     public function save(Request $request){
@@ -75,7 +81,11 @@ class ServiceController extends Controller
         $service = Service::where('id',$id)->first();
         $customers = Customer::where('status',1)->get();
         $products = Product::where('status',1)->get();
-        return view('admin.service.edit',['service' => $service,'customers' => $customers,'products' => $products]);
+        return view('admin.service.edit',[
+            'service' => $service,
+            'customers' => $customers,
+            'products' => $products
+        ]);
     }
 
     public function delete($id) {

@@ -30,7 +30,10 @@ class Product_TypeController extends Controller
 
         $product_types = Product_Type::all();
 
-        return view('admin.product_type.index', ['product_types' => $product_types, 'deleg' => $this->sess]);
+        return view('admin.product_type.index', [
+            'product_types' => $product_types,
+            'deleg' => $this->sess
+        ]);
 
     }
     public function create(){

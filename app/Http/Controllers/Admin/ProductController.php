@@ -35,7 +35,10 @@ class ProductController extends Controller
         }
     	//$products = Product::all();
         $products = Product::where('status',1)->orderBy('id','desc')->get();
-    	return view('admin.product.index')->with(['products' => $products,'deleg' => $this->sess]);
+    	return view('admin.product.index',[
+    	    'products' => $products,
+            'deleg' => $this->sess
+        ]);
     }
     //Yeni Ürünler
     public function create(){
@@ -44,7 +47,10 @@ class ProductController extends Controller
         }
         $brands = Brand::where('status',1)->get();
         $product_types = Product_Type::where('status',1)->get();
-    	return view('admin.product.create',['brands' => $brands,'product_types' => $product_types]);
+    	return view('admin.product.create',[
+    	    'brands' => $brands,
+            'product_types' => $product_types
+        ]);
     }
     public function ImagePostSave(Request $request){
         $this->validate($request, [
@@ -84,7 +90,11 @@ class ProductController extends Controller
         $product_types = Product_Type::where('status',1)->get();
     	$id = $request->id;
     	$product = Product::where('id',$id)->first();
-    	return view('admin.product.edit')->with(['product' => $product,'brands' => $brands,'product_types' => $product_types]);
+    	return view('admin.product.edit',[
+    	    'product' => $product,
+            'brands' => $brands,
+            'product_types' => $product_types
+        ]);
     }
     
     // Ürün Güncelleme Fonksiyonu
@@ -116,7 +126,12 @@ class ProductController extends Controller
         print_r($comments);
         die();*/
 
-        return view('admin.product.show',['products' => $products,'brands' => $brands,'product_types' => $product_types,'comments'=>$comments]);
+        return view('admin.product.show',[
+            'products' => $products,
+            'brands' => $brands,
+            'product_types' => $product_types,
+            'comments'=>$comments
+        ]);
     }
 
     public function commentThoughtSave(Request $request)
@@ -134,9 +149,15 @@ class ProductController extends Controller
         print_r($newUsersCom);
         die();*/
         if ($data['thought']==0) {
-            Comment::where('id',$data['comment_id'])->update(['negative_comment'=>$count->negative_comment+1,'users_comment'=>json_encode($newUsersCom)]);
+            Comment::where('id',$data['comment_id'])->update([
+                'negative_comment' => $count->negative_comment+1,
+                'users_comment' => json_encode($newUsersCom)
+            ]);
         }else{
-            Comment::where('id',$data['comment_id'])->update(['positive_comment'=>$count->positive_comment+1,'users_comment'=>json_encode($newUsersCom)]);
+            Comment::where('id',$data['comment_id'])->update([
+                'positive_comment' => $count->positive_comment+1,
+                'users_comment' => json_encode($newUsersCom)
+            ]);
         }
         return redirect()->back();
     }

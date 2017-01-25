@@ -283,7 +283,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/admin/service/save','Admin\ServiceController@save');
     Route::post('/admin/service/update/{id}','Admin\ServiceController@update');
-    Route::post('/admin/service/AddPayment/{id}','Admin\ServiceController@AddPayment');
+    Route::post('/admin/service/AddPayment/{id}','Admin\ServiceController@AddPayment'); // Servise ürün ekleme ve sepeti güncelleme
     // Servis Modülü Bitiş
 
 

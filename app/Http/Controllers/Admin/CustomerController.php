@@ -35,7 +35,10 @@ class CustomerController extends Controller
         }
    		$data=Customer::where('status','1')->get();
 
-   		return view('admin.customers.index',['data'=>$data,'deleg' => $this->sess]);
+   		return view('admin.customers.index',[
+   		    'data'=>$data,
+            'deleg' => $this->sess
+        ]);
    	}
 
    	public function create(Request $request){
