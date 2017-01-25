@@ -138,7 +138,6 @@ class ProductController extends Controller
         }else{
             Comment::where('id',$data['comment_id'])->update(['positive_comment'=>$count->positive_comment+1,'users_comment'=>json_encode($newUsersCom)]);
         }
-
         return redirect()->back();
     }
 

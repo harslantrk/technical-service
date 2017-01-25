@@ -13,7 +13,7 @@ class Comment extends Model
      */
     protected $table = "comment";
     protected $fillable = [
-        'product_id','user_id','status','positive_comment', 'negative_comment','comment','users_idea'
+        'product_id','user_id','status','positive_comment', 'negative_comment','comment','users_comment'
     ];
 
     public function product()

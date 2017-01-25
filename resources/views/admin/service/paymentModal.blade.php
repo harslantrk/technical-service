@@ -63,7 +63,7 @@
                             </div><!-- /.box-body -->
                             <div class="box-footer">
                                 <div class="pull-right">
-                                    <button type="submit" class="btn btn-success">Ekle</button>
+                                    <button type="submit" id="ekle" class="btn btn-success">Ekle</button>
                                 </div>
                             </div><!-- /.box-footer -->
                         </div><!-- /. box -->
@@ -113,8 +113,15 @@
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
     <script type="text/javascript">
+        $(document).ready(function () {
+            document.getElementById('ekle').setAttribute('disabled','');
+        });
         function degis(s) {
             document.getElementById('unit_price').value = s[s.selectedIndex].id;
+            document.getElementById('quantity').value = '';
+            document.getElementById('kdv').value= '';
+            document.getElementById('total').value = '';
+            document.getElementById('ekle').setAttribute('disabled','');
             console.log(s[s.selectedIndex].id);
         }
         $('#quantity').keyup(function () {
@@ -122,6 +129,7 @@
             var kdv = document.getElementById('kdv');
             var total = document.getElementById('total');
             var unit_price =document.getElementById('unit_price').value;
+            document.getElementById('ekle').removeAttribute('disabled');
 
             kdv.value = (quantity * unit_price) * 18/100;
             total.value = ((quantity * unit_price) + Number(kdv.value)) ;
