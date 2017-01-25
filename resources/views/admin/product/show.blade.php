@@ -78,7 +78,7 @@
                     <div class="col-sm-3 col-xs-6">
                         <label class="control-label">Ürün Resmi</label>
                         @if($products->image)
-                            <img style="margin: 0px;" class="profile-user-img img-responsive" src="{{URL::to($products->image)}}" alt="User profile picture">
+                            <img style="margin: 0px;" class="img-bordered img-responsive" src="{{URL::to($products->image)}}" alt="User profile picture">
                         @endif
                     </div>
                 </div><!-- /.box-body -->

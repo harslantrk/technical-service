@@ -64,7 +64,7 @@ class ProductController extends Controller
         $image->move($destinationPath,$input['imagename']);
 
         $user = Product::findOrFail($request->id);
-        $user->picture ='/uploads/'.$input['imagename'];
+        $user->image ='/uploads/'.$input['imagename'];
         $user->save();
 
         return redirect()->back();

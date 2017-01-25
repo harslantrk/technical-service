@@ -83,6 +83,7 @@
             <div class="col-sm-3 col-xs-6">
               <div class="form-group">
                 <input class="btn" type="file" name="image" id="image">
+                <input type="hidden" name="id" value="{{$product->id}}">
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-success">Resim Yükle</button>
@@ -92,7 +93,7 @@
           <div class="col-sm-3 col-xs-6">
             <label class="control-label">Ürün Resmi</label>
             @if($product->image)
-              <img style="margin: 0px;" class="profile-user-img img-responsive" src="{{URL::to($product->image)}}" alt="User profile picture">
+              <img class="img-responsive img-bordered" src="{{URL::to($product->image)}}" alt="User profile picture">
             @endif
           </div>
         </div><!-- /.box-body -->
