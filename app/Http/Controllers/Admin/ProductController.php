@@ -179,4 +179,11 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
+    public function commentUnCheck($id)
+    {
+        Comment::where('id',$id)->update(['status'=>0]);
+
+        return redirect()->back();
+    }
+
 }

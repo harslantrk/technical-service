@@ -53,9 +53,9 @@
                         <th>{{$product->out_price}}</th>
                         <th>{{\Carbon\Carbon::parse($product->updated_at)->format('d/m/Y H:i:s')}}</th>
                         <th>
-                          <a title="Güncelle" href="/admin/product/show/{{$product->id}}" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a>
-                          @if($deleg['u'] == 1)<a title="Güncelle" href="/admin/product/edit/{{$product->id}}" class="btn btn-success btn-xs"><i class="fa fa-upload"></i></a>@endif
-                          @if($deleg['d'] == 1)<a title="Sil" onclick="deleteApprove('/admin/product/delete/{{$product->id}}')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a> @endif
+                          <a title="Güncelle" href="/admin/product/show/{{$product->id}}" class="btn btn-primary"><i class="fa fa-search"></i></a>
+                          @if($deleg['u'] == 1)<a title="Güncelle" href="/admin/product/edit/{{$product->id}}" class="btn btn-success"><i class="fa fa-edit"></i></a>@endif
+                          @if($deleg['d'] == 1)<a title="Sil" onclick="deleteApprove('/admin/product/delete/{{$product->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a> @endif
                         </th>
                       </tr>
                       <?php $sira++;?>

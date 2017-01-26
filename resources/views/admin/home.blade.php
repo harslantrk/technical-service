@@ -171,12 +171,20 @@
             @foreach($comments as $comment)
               <tr>
                 <th>{{$sira}}</th>
-                <th>{{$comment->product->name}}</th>
+                  @if($comment->status == 1)
+                  <th><a href="/admin/product/show/{{$comment->product_id}}">{{$comment->product->name}}</a></th>
+                  @else
+                  <th>{{$comment->product->name}}</th>
+                  @endif
                 <th>{{$comment->user->name}}</th>
                 <th>{{$comment->comment}}</th>
-                <th>{{\Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i')}}</th>
+                <th>{{\Carbon\Carbon::parse($comment->updated_at)->format('d/m/Y H:i')}}</th>
                 <th>
+                  @if($comment->status == 0)
                   <a title="Onayla" href="/admin/product/commentCheck/{{$comment->id}}" class="btn btn-success btn-xs"><i class="fa fa-check"></i></a>
+                  @else
+                  <a title="Yorumu Kaldır" href="/admin/product/commentUnCheck/{{$comment->id}}" class="btn btn-danger btn-xs"><i class="fa fa-close"></i></a>
+                  @endif
                 </th>
               </tr>
               <?php $sira++;?>
