@@ -106,7 +106,8 @@ class ServiceController extends Controller
     public function PaymentView($id){
         $service_payments = ServicePayment::where('service_id',$id)->get();
         $service = Service::where('id',$id)->first();
-        $products = Product::where('status',1)->get();
+        $products = Product::where('status',1)->where('stock','>',0)->get();
+
         return view('admin.service.paymentModal',[
             'service_id' => $id,
             'products' => $products,
@@ -118,6 +119,10 @@ class ServiceController extends Controller
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         $data['service_id'] = $id;
+
+        $stock = Product::where('id',$data['product_id'])->first();
+        $stock->stock = $stock->stock - $data['quantity'];
+        $stock->save();
 
         $guncelle = ServicePayment::where('service_id',$id)->where('product_id',$data['product_id'])->first();
         if ($guncelle) {

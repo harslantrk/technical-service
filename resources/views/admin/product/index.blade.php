@@ -49,7 +49,11 @@
                         <th>{{$sira}}</th>
                         <th>{{$product->name}}</th>
                         <th>{{$product->brand->brand}}</th>
-                        <th>{{$product->stock}}</th>
+                          @if($product->stock == 0)
+                          <th><span class="text-red">Stokda Yok</span></th>
+                          @else
+                          <th>{{$product->stock}}</th>
+                          @endif
                         <th>{{$product->out_price}}</th>
                         <th>{{\Carbon\Carbon::parse($product->updated_at)->format('d/m/Y H:i:s')}}</th>
                         <th>

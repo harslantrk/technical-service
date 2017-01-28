@@ -32,9 +32,10 @@
                                     <select onchange="degis(this)" id="product_id" name="product_id" class="select2 form-control" style="width: 100%">
                                         <option selected disabled>Ürün Seç</option>
                                         @foreach($products as $product)
-                                            <option value="{{$product->id}}" id="{{$product->out_price}}">{{$product->name}}</option>
+                                            <option value="{{$product->id}}" id="{{$product->out_price}}" data-id="{{$product->stock}}">{{$product->name}}</option>
                                             @endforeach
                                     </select>
+                                    <input type="hidden" id="stock">
                                 </div>
                                 <div class="input-group form-group">
                                     <div class="input-group-addon">
@@ -122,6 +123,8 @@
             document.getElementById('kdv').value= '';
             document.getElementById('total').value = '';
             document.getElementById('ekle').setAttribute('disabled','');
+            var stock_Varmi = s[s.selectedIndex].getAttribute('data-id');
+            document.getElementById('stock').value = stock_Varmi;
             console.log(s[s.selectedIndex].id);
         }
         $('#quantity').keyup(function () {
@@ -129,10 +132,21 @@
             var kdv = document.getElementById('kdv');
             var total = document.getElementById('total');
             var unit_price =document.getElementById('unit_price').value;
+            var stock =document.getElementById('stock').value;
             document.getElementById('ekle').removeAttribute('disabled');
 
-            kdv.value = (quantity * unit_price) * 18/100;
-            total.value = ((quantity * unit_price) + Number(kdv.value)) ;
+            if(quantity>stock){
+                document.getElementById('quantity').value = stock;
+                quantity = stock;
+                kdv.value = (quantity * unit_price) * 18/100;
+                total.value = ((quantity * unit_price) + Number(kdv.value)) ;
+                console.log(quantity);
+            }else{
+                kdv.value = (quantity * unit_price) * 18/100;
+                total.value = ((quantity * unit_price) + Number(kdv.value)) ;
+                console.log('q');
+            }
+
         });
     </script>
 @endsection
