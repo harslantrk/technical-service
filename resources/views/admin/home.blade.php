@@ -48,7 +48,7 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>{{$product}}</h3>
+          <h3>{{$products->count()}}</h3>
           <p>Adet Ürün</p>
         </div>
         <div class="icon">
@@ -147,7 +147,7 @@
   <!-- Main row -->
   <div class="row">
     <!-- Left col -->
-    <section class="col-lg-7 connectedSortable">
+    <section class="col-md-6 connectedSortable">
       <!-- TO DO List -->
       <div class="box box-primary">
         <div class="box-header">
@@ -197,31 +197,47 @@
       </div><!-- /.box -->
     </section><!-- /.Left col -->
     <!-- right col (We are only adding the ID to make the widgets sortable)-->
-    <section class="col-lg-5 connectedSortable">
+    <section class="col-md-6 connectedSortable">
       <!-- Calendar -->
-      <div class="box box-solid bg-green-gradient">
+      <div class="box box-danger">
         <div class="box-header">
-          <i class="fa fa-calendar"></i>
-          <h3 class="box-title">Takvim</h3>
+          <i class="fa fa-book"></i>
+          <h3 class="box-title">Ürünler</h3>
           <!-- tools box -->
-          <div class="pull-right box-tools">
-            <!-- button with a dropdown -->
-            <div class="btn-group">
-              <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-              <ul class="dropdown-menu pull-right" role="menu">
-                <li><a href="#">Olay Ekle</a></li>
-                <li><a href="#">Olay Sil</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Takvimi Görüntüle</a></li>
-              </ul>
-            </div>
-            <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-          </div><!-- /. tools -->
         </div><!-- /.box-header -->
-        <div class="box-body no-padding">
-          <!--The calendar -->
-          <div id="calendar" style="width: 100%"></div>
+        <div class="box-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <td>#</td>
+              <td>Ürün Adı</td>
+              <td>Marka</td>
+              <td>Stok</td>
+              <td>Çıkış Fiyatı</td>
+              <td>İşlemler</td>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $sira = 1;?>
+            @foreach($products as $product)
+              @if($sira<6)
+                <tr>
+                  <th>{{$sira}}</th>
+                  <th>{{$product->name}}</th>
+                  <th>{{$product->brand->brand}}</th>
+                  <th>{{$product->stock}}</th>
+                  <th>{{$product->out_price}}</th>
+                  <th>
+                    <a title="Görüntüle" href="/admin/product/show/{{$product->id}}" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></a>
+                  </th>
+                </tr>
+                @endif
+              <?php $sira++;?>
+            @endforeach
+            <!-- Modal -->
+            </tbody>
+            <!-- Trigger the modal with a button -->
+          </table>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
 

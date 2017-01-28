@@ -64,6 +64,9 @@
                     </tbody>
                     <!-- Trigger the modal with a button -->
                   </table>
+                  <div>
+                    <a href="/admin/product/AllProductExcelExport" class="btn btn-success"><i class="fa fa-file-excel-o"> Excel Çıktısı</i></a>
+                  </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->

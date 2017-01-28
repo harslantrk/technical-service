@@ -28,14 +28,14 @@ class HomeController extends Controller
         $five_services = Service::where('status',1)->orderBy('id','desc')->take(5)->get(); // Son 5 kayıt
         $five_customers = Customer::where('status',1)->orderBy('id','desc')->take(5)->get(); // Son 5 kayıt
         $service = Service::all()->count();
-        $product = Product::all()->count();
+        $products = Product::where('status',1)->orderBy('created_at','desc')->get();
         $brand = Brand::all()->count();
         $customer = Customer::all()->count();
         $comments = Comment::orderBy('status','asc')->get();
         return view('admin.home',[
             'brand' => $brand,
             'customer' => $customer,
-            'product' => $product,
+            'products' => $products,
             'service' => $service,
             'five_services' => $five_services,
             'five_customers' => $five_customers,

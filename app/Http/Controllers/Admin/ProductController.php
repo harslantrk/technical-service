@@ -6,6 +6,8 @@ use App\Brand;
 use App\Comment;
 use App\Http\Requests;
 use App\Product_Type;
+use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -184,6 +186,53 @@ class ProductController extends Controller
         Comment::where('id',$id)->update(['status'=>0]);
 
         return redirect()->back();
+    }
+
+    public function AllProductExcelExport()
+    {
+        $products = Product::where('status',1)->get();
+        Excel::create(Carbon::now()->format('d / m / Y').' Ürünler', function($excel) use($products) {
+
+            $excel->sheet('Ürünler', function($sheet) use($products) {
+
+                $row = 2;
+                $sheet->setAutoSize(true);
+                $sheet->cells('A1:I1',function ($cells){
+                    $cells->setBackground('#e69988');
+                    $cells->setFont([
+                        'family' => 'Calibri',
+                        'size'   => '16',
+                        'bold'   => true
+                    ]);
+                    $cells->setAlignment('center');
+                });
+                $sheet->setBorder('A1:I1','thin');
+                $sheet->row(1,['Ürün Adı','Marka','Ürün Türü',' Açıklama','Stok','Giriş Fiyatı','Çıkış Fiyatı','Girişi Yapan','Giriş Tarihi']);
+                $sheet->setColumnFormat([
+                    'E' => '0',
+                    'F' => '0',
+                    'G' => '0',
+                    'I' => 'd/m/y h:mm'
+                ]);
+
+                foreach ($products as $product) {
+                    $sheet->row($row,[
+                        $product->name,
+                        $product->brand->brand,
+                        $product->product_type->product_type,
+                        $product->detail,
+                        $product->stock,
+                        $product->in_price,
+                        $product->out_price,
+                        $product->user->name,
+                        Carbon::parse($product->created_at)->format('d/m/Y H:i:s')
+                    ]);
+                    $row++;
+                }
+
+            });
+
+        })->export('xls');
     }
 
 }
