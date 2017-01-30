@@ -105,7 +105,7 @@
                                 @endif
                                 <div class="comment-text">
                               <span class="username">
-                                {{$comment->user->name}}
+                                  <a href="/admin/users/commentShow/{{$comment->user->id}}">{{$comment->user->name}}</a>
                                 <span class="text-muted pull-right">{{\Carbon\Carbon::parse($comment->created_at)->format('d/m/Y H:i')}}</span>
                               </span><!-- /.username -->
                                    {{$comment->comment}}

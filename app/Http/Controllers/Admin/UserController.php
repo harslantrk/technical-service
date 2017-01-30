@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Comment;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
@@ -183,5 +184,16 @@ class UserController extends Controller
 
         return back()
             ->with('success','Resim Başarı İle Yüklenmiştir');
+    }
+
+    public function commentShow($id)
+    {
+        $comments = Comment::where('user_id',$id)
+            ->where('status',1)
+            ->orderBy('created_at','desc')
+            ->get();
+        return view('admin.users.commentShow',[
+            'comments' => $comments
+        ]);
     }
 }

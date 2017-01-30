@@ -155,7 +155,7 @@
           <h3 class="box-title">Yapılan Yorumlar</h3>
         </div><!-- /.box-header -->
         <div class="box-body">
-          <table id="product_table" class="table table-bordered table-striped">
+          <table id="product_table" class="table table-bordered table-striped table-responsive">
             <thead>
             <tr>
               <td>#</td>

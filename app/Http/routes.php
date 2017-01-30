@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/admin/users/create','Admin\UserController@create');//yeni üye ekleme sayfası
 	Route::get('/admin/users/edit/{id}','Admin\UserController@edit');//var olan üyenin bilgilerini gösteren sayfa
 	Route::get('/admin/users/delete/{id}','Admin\UserController@delete');//var olan üyenin bilgilerini silen fonksiyon
+    Route::get('/admin/users/commentShow/{id}','Admin\UserController@commentShow');//Üyelerin Yorumlarını Listelemek için Şuanlık
 
 	Route::post('/admin/users/save','Admin\UserController@save');//yeni üye kayıt eden fonksiyon
 	Route::post('/admin/users/update','Admin\UserController@update');//var olan üyenin bilgilerini güncelleyen fonksiyon
