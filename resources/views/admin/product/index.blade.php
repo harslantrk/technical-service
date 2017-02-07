@@ -50,11 +50,14 @@
                         <th>{{$product->name}}</th>
                         <th>{{$product->brand->brand}}</th>
                           @if($product->stock == 0)
-                          <th><span class="text-red">Stokda Yok</span></th>
+                          <th>
+                            <span class="text-red"><i class="fa fa-warning"></i> Stokda Yok</span>
+
+                          </th>
                           @else
                           <th>{{$product->stock}}</th>
                           @endif
-                        <th>{{$product->out_price}}</th>
+                        <th>{{$product->out_price}} <i class="fa fa-turkish-lira"></i></th>
                         <th>{{\Carbon\Carbon::parse($product->updated_at)->format('d/m/Y H:i:s')}}</th>
                         <th>
                           <a title="Güncelle" href="/admin/product/show/{{$product->id}}" class="btn btn-primary"><i class="fa fa-search"></i></a>

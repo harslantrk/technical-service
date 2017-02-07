@@ -20,7 +20,7 @@ class CreateCommentTable extends Migration
             $table->integer('positive_comment');
             $table->integer('negative_comment');
             $table->text('comment');
-            $table->json('users_comment');
+            $table->string('users_comment');
             $table->timestamps();
 
         });

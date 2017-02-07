@@ -629,6 +629,8 @@
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="/plugins/morris/morris.min.js"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script src="/plugins/chartjs/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!-- jvectormap -->
@@ -669,6 +671,7 @@
     <script src="/js/ajax.js"></script>
     <!-- AdminLTE App -->
     <script src="/js/app.js"></script>
+    @yield('jscode')
     <script>
       if(window.location.pathname.split('/')[2] == 'sms'){
         var kalan_karakter_1 = 160 - document.getElementById('sms_mesaj_secerek').value.length;
