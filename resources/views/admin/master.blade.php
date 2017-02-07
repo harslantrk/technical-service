@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- fullCalendar 2.2.5-->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{URL::to('/css/AdminLTE.css')}}">
     <link rel="stylesheet" href="{{URL::to('/css/main.css')}}">
@@ -36,6 +38,7 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{URL::to('/plugins/select2/select2.min.css')}}">
       <link href="{{URL::to('/css/file/fileinput.css')}}" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{URL::to('/css/myedit.css')}}">
       <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
       <script src="/plugins/file/fileinput.js" type="text/javascript"></script>
       <!-- DataTables Bootstrap-->
@@ -615,7 +618,11 @@
     </div><!-- /.modal -->
 
     <!-- /Modal Alanı -->
-
+    <!-- fullCalendar 2.2.5 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/lang-all.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

@@ -289,6 +289,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/service/AddPayment/{id}','Admin\ServiceController@AddPayment'); // Servise ürün ekleme ve sepeti güncelleme
     // Servis Modülü Bitiş
 
+    //Takvim İşlemleri Başlangıç
+    Route::get('/admin/event','Admin\EventController@index'); // Takvim index'i açma
+    Route::get('admin/event/api', function () {
+        $events = DB::table('event')->select('id', 'user_id', 'title', 'start_time as start', 'end_time as end')->get();
+
+        return $events;
+    });
+    Route::post('/admin/event/createCalendarModalShow','Admin\EventController@createCalendarModalShow'); //Reçete İçin Raporları Getirme Ajax
+    Route::post('/admin/event/calendarModalSave','Admin\EventController@calendarModalSave');
+    Route::post('/admin/event/editModal','Admin\EventController@editModal');
+    //Takvim İşlemleri Bitiş
 
 });
 
