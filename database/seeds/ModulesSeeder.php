@@ -101,5 +101,15 @@ class ModulesSeeder extends Seeder
         $modules->priority = 9;
         $modules->status = 1;
         $modules->save();
+
+        $modules = new Modules();
+        $modules->name = 'Takvim';
+        $modules->url = '/admin/event';
+        $modules->icon = 'fa-calendar';
+        $modules->parent = 0;
+        $modules->parent_id = 0;
+        $modules->priority = 10;
+        $modules->status = 1;
+        $modules->save();
     }
 }

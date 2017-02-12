@@ -1,6 +1,7 @@
 @extends('admin.master')
 
 @section('content')
+    <?php setlocale(LC_ALL,'tr')?>
     @if($deleg['u'] == 0 && $deleg['d'] == 0 && $deleg['a'] == 0)
         <script type="text/javascript">
             alert('Sadece Görüntüleme Yetkisine Sahipsiniz !');
@@ -79,14 +80,14 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month'
+                    right: 'month,agendaWeek,agendaDay'
                 },
                 editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 events: {
                     url: base_url + '/admin/event/api',
                     error: function() {
-                        alert("Gelen Veri Json Bulunamadı.");
+                        alert("Gelen Json Verisi Bulunamadı.");
                     }
                 }
             });
