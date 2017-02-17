@@ -24,5 +24,17 @@ class UserSeeder extends Seeder
         $user->delegation_id = 1;
 
         $user->save();
+
+        $user = new User();
+        $user->name = 'Hasan Arslantürk';
+        $user->username = 'harslantrk';
+        $user->email = 'harslantrk@gmail.com';
+        $user->password = bcrypt('123456789');
+        $user->group_id = 2;
+        $user->sms_code = 61031;
+        $user->status = 1;
+        $user->delegation_id = 1;
+
+        $user->save();
     }
 }

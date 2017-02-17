@@ -12,19 +12,15 @@ class CreateSupportTable extends Migration
      */
     public function up()
     {
-        Schema::create('supports', function (Blueprint $table) {
+        Schema::create('support', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('sender_id')->unsigned();
-            $table->integer('receiver_id')->unsigned();
-            $table->foreign('sender_id')->references('id')->on('users');
-            $table->foreign('receiver_id')->references('id')->on('users');
+            $table->integer('sender_id');
+            $table->integer('receiver_id');
             $table->string('title');
-            $table->integer('parent_id');
-            $table->integer('status')->default(1);
-            $table->boolean('read_option')->default(0);
-            $table->boolean('junk_option')->default(0);
-            $table->boolean('draft_option')->default(0);
-            $table->text('description');
+            $table->string('detail');
+            $table->enum('status',['0','1']);
+            $table->enum('read',['0','1']);
+            $table->enum('trash',['0','1']);
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ class CreateSupportTable extends Migration
      */
     public function down()
     {
-        Schema::drop('supports');
+        Schema::drop('support');
     }
 }

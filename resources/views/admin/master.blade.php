@@ -38,16 +38,16 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{URL::to('/plugins/select2/select2.min.css')}}">
       <link href="{{URL::to('/css/file/fileinput.css')}}" media="all" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="{{URL::to('/css/myedit.css')}}">
-      <script src="/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-      <script src="/plugins/file/fileinput.js" type="text/javascript"></script>
+      <link rel="stylesheet" href="{{URL::to('/css/myedit.css')}}">
+      <script src="{{URL::to('/plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
+      <script src="{{URL::to('/plugins/file/fileinput.js')}}" type="text/javascript"></script>
       <!-- DataTables Bootstrap-->
-      <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
+      <link rel="stylesheet" href="{{URL::to('/plugins/datatables/dataTables.bootstrap.css')}}">
       <!-- Sweet Alert -->
-      <link rel="stylesheet" type="text/css" href="/plugins/sweetalert/dist/sweetalert.css">
+      <link rel="stylesheet" type="text/css" href="{{URL::to('/plugins/sweetalert/dist/sweetalert.css')}}">
       <!-- blog  CK Editor -->
       <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-      <script src="/js/custom.js"></script>
+      <script src="{{URL::to('/js/custom.js')}}"></script>
       <!-- SlimScroll -->
       <script type="text/javascript">
           /*
@@ -618,6 +618,7 @@
     </div><!-- /.modal -->
 
     <!-- /Modal Alanı -->
+
     <!-- fullCalendar 2.2.5 -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
@@ -678,6 +679,8 @@
     <script src="/js/ajax.js"></script>
     <!-- AdminLTE App -->
     <script src="/js/app.js"></script>
+    <!-- CK Editor -->
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     @yield('jscode')
     <script>
       if(window.location.pathname.split('/')[2] == 'sms'){
@@ -718,7 +721,7 @@
 
       $('.phone_mask').inputmask('0(999)999-9999');
 
-      $("#users_table,#intro_table,#popup_table,#pagein_table,#hastalar_table,#customers_table,#service_table,#brand_table,#product_type_table,#product_table").DataTable({
+      $("#users_table,#intro_table,#popup_table,#pagein_table,#hastalar_table,#customers_table,#service_table,#brand_table,#product_type_table,#product_table,#support_table").DataTable({
           "language": {
               "emptyTable": "Hiç bir veri bulunamadı",
               "info": "Gösterim _START_ ile _END_ arası _TOTAL_ toplam veri",

@@ -167,33 +167,16 @@ Route::group(['middleware' => ['auth']], function () {
 
     /*TEKNİK-TALEP MODÜLÜ*/
 
-    /* ANA SAYFA (GELEN KUTUSU) */
-    Route::get('/admin/supports','Admin\SupportsController@index');//Destek sayfası. Default olarak Gelen kutusunu yükler
 
-    /* LİSTELEME SAYFALARI */
-    Route::get('/admin/supports/inbox/','Admin\SupportsController@showInbox');               //Gelen mesajları gösterir
-    Route::get('/admin/supports/sents/','Admin\SupportsController@showSent');               //Gönderilen mesajları gösterir
-    Route::get('/admin/supports/drafts/','Admin\SupportsController@showDraft');             //Taslak'a kaydedilen mesajları gösterir
-    Route::get('/admin/supports/junks/','Admin\SupportsController@showJunk');               //Önemsiz mesajları gösterir
-    Route::get('/admin/supports/trashes/','Admin\SupportsController@showTrash');            //Silinen mesajları gösterir
-    Route::get('/admin/supports/show-message/{id}','Admin\SupportsController@showMessage');//Gelen kutusunda tıklanan mesajın içeriğini gösterir
-    Route::get('/admin/supports/show-sentMessage/{id}','Admin\SupportsController@showSentMessage');//Giden kutusunda tıklanan mesajın içeriğini gösterir
-    Route::get('/admin/supports/replyMessage/{id}','Admin\SupportsController@showReply');//Gelen mesaja cevap yazma formu
-    Route::get('/admin/supports/compose','Admin\SupportsController@showCompose');           //Yeni mesaj oluşturma formunu yükler
-    Route::get('/admin/supports/conversation','Admin\SupportsController@showConversation'); //Konuşmayı görüntüler
+    /* SUPPORT Başlangıç */
+    Route::get('/admin/support','Admin\SupportController@index');
+    Route::get('/admin/support/sent','Admin\SupportController@sent');
+    Route::get('/admin/support/trash','Admin\SupportController@trash');
+    Route::get('/admin/support/read-support/{id}','Admin\SupportController@readSupport');
+    Route::get('/admin/support/delete/{id}','Admin\SupportController@deleteSupport');
 
-    /* İŞLEM SAYFALARI */
-    Route::post('/admin/supports/send-message','Admin\SupportsController@doCompose');//Mesaj Gönderme işlemini Yapar
-    Route::post('/admin/supports/send-reply','Admin\SupportsController@doReply');//Cevap mesajını yollar
-    Route::get('/admin/supports/searchedMail/{keyword}','Admin\SupportsController@doSearch');//Arama işlemini Yapar
-    Route::get('/admin/supports/junkMessage/{val}','Admin\SupportsController@doJunk');//Mesajı Önemsiz yapar
-    Route::get('/admin/supports/deleteMessage/{val}','Admin\SupportsController@doDelete');//Gelen kusutundan Mesajı Siler
-    Route::get('/admin/supports/undoDeleteMessage/{val}','Admin\SupportsController@doUndoDelete');//Gelen ktsundan Mesajı Siler
-    Route::get('/admin/supports/undoJunkMessage/{val}','Admin\SupportsController@doUndoJunk');//Mesajı Önemsiz yapar
-    Route::get('/admin/supports/deleteSentMessage/{val}','Admin\SupportsController@doSentDelete');//Gnd. kututundan Mesajı Siler
-    Route::get('/admin/supports/draftMessage/{val}','Admin\SupportsController@doDraft');//Gnd kutusundaki Mesajı taslak yapar
-    Route::post('/front/sendMessage','Front\SupportsController@doSend');//Destek Mesajı Oluşturma işlemini yapar
-    /* TEKNİK TALEP MODÜLÜ BİTİŞ */
+    Route::post('/admin/support/supportSave','Admin\SupportController@supportSave');
+
 
     // Yetkilendirme Modülü
     Route::get('/admin/delegations','Admin\UserDelegationController@index');

@@ -111,5 +111,15 @@ class ModulesSeeder extends Seeder
         $modules->priority = 10;
         $modules->status = 1;
         $modules->save();
+
+        $modules = new Modules();
+        $modules->name = 'Mesaj';
+        $modules->url = '/admin/support';
+        $modules->icon = 'fa-inbox';
+        $modules->parent = 0;
+        $modules->parent_id = 0;
+        $modules->priority = 11;
+        $modules->status = 1;
+        $modules->save();
     }
 }

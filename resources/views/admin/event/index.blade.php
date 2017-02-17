@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-    <?php setlocale(LC_ALL,'tr')?>
+    <?php setlocale(LC_ALL,'tr_TR.UTF-8');?>
     @if($deleg['u'] == 0 && $deleg['d'] == 0 && $deleg['a'] == 0)
         <script type="text/javascript">
             alert('Sadece Görüntüleme Yetkisine Sahipsiniz !');
@@ -37,8 +37,13 @@
                         <div class="box-body no-padding">
                             <ul class="nav nav-pills nav-stacked">
                                 @foreach($calendars as $calendar)
-                                    <li style="background-color:#F7F7F7;"><b>{{\Carbon\Carbon::parse($calendar->start_time)->formatLocalized('%d %B %Y')}}</b></li>
-                                    <li style="background-color:#FFF;"><a href="#" id="{{$calendar->id}}" class="calendarModal"  data-toggle="modal" data-target="#modalUpdateCalendar">{{\Carbon\Carbon::parse($calendar->start_time)->format('H:i').' '.$calendar->title}}</a></li>
+                                    @if($deleg['u'] == 1)
+                                        <li style="background-color:#F7F7F7;"><b>{{\Carbon\Carbon::parse($calendar->start_time)->formatLocalized('%d %B %Y')}}</b></li>
+                                        <li style="background-color:#FFF;"><a href="#" id="{{$calendar->id}}" class="calendarModal"  data-toggle="modal" data-target="#modalUpdateCalendar">{{\Carbon\Carbon::parse($calendar->start_time)->format('H:i').' '.$calendar->title}}</a></li>
+                                        @else
+                                        <li style="background-color:#F7F7F7;"><b>{{\Carbon\Carbon::parse($calendar->start_time)->formatLocalized('%d %B %Y')}}</b></li>
+                                        <li style="background-color:#FFF;"><span>{{\Carbon\Carbon::parse($calendar->start_time)->format('H:i').' '.$calendar->title}}</span></li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div><!-- /.box-body -->
