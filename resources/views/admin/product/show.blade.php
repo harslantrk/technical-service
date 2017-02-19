@@ -34,7 +34,7 @@
                             <select name="brand_id" class="select2 form-control" style="width: 100%;">
                                 <option disabled>Marka Seçiniz</option>
                                 @foreach($brands as $brand)
-                                    @if($products->id == $brand->id)
+                                    @if($products->brand_id == $brand->id)
                                         <option selected value="{{$brand->id}}">{{$brand->brand}}</option>
                                     @else
                                         <option value="{{$brand->id}}">{{$brand->brand}}</option>
@@ -47,7 +47,7 @@
                             <select name="product_type_id" class="select2 form-control" style="width: 100%;">
                                 <option disabled>Ürün Türü Seçiniz</option>
                                 @foreach($product_types as $product_type)
-                                    @if($products->id == $product_type->id)
+                                    @if($products->product_type_id == $product_type->id)
                                         <option selected value="{{$product_type->id}}">{{$product_type->product_type}}</option>
                                     @else
                                         <option value="{{$product_type->id}}">{{$product_type->product_type}}</option>

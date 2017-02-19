@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Support;
 use Illuminate\Support\ServiceProvider;
 
 use Auth;
@@ -28,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $mainMenu=Page::where('status','1')->where('cat_id','1')->orderBy('priority','asc')->get();
         $allSetting= Setting::find(1)->first();
         $allContact= Contacts::where('read','0')->where('status','1')->get();
-        
+
         //son Master Blade İşlemi
 
         view()->share('modules', $modules);

@@ -18,9 +18,6 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-3">
-                    @if($deleg['a'] == 1)
-                        <button id="createSupport" onclick="createSupport()" class="btn btn-primary btn-block margin-bottom" data-toggle="modal" data-target="#modalNewSupport">Yeni Mesaj</button>
-                    @endif
                     <div class="box box-solid">
                         <div class="box-header with-border">
                             <h3 class="box-title">Mesajlar</h3>
@@ -51,18 +48,45 @@
                         <div class="box-body no-padding">
                             <div class="mailbox-read-info">
                                 <h3>{{$readSupport->title}}</h3>
-                                <h5>{{$supports[0]->user_name}} <span class="mailbox-read-time pull-right">{{\Carbon\Carbon::parse($readSupport->created_at)->format('d M Y H:i:s')}}</span></h5>
+                                <h5>Gönderilen : {{$supports[0]->user_name}} <span class="mailbox-read-time pull-right">{{\Carbon\Carbon::parse($readSupport->created_at)->format('d M Y H:i:s')}}</span></h5>
                             </div><!-- /.mailbox-read-info -->
                             <div class="mailbox-read-message">
-                               {!! $readSupport->detail !!}
+                                {!! $readSupport->detail !!}
                             </div><!-- /.mailbox-read-message -->
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <div class="pull-right">
-                                <button class="btn btn-danger"><i class="fa fa-trash-o"></i> Sil</button>
-                                <a href="{{URL::to('admin/support/reply-support/'.$readSupport->id)}}" class="btn btn-primary"><i class="fa fa-reply"></i> Yanıtla</a>
-                            </div>
-                            <a href="{{URL::to('admin/support')}}" class="btn btn-default"><i class="fa fa-close"></i>Geri Dön</a>
+                            <form role="form" action="{{URL::to('/admin/support/supportSave')}}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="sender_id" value="{{Auth::user()->id}}">
+                                <div class="form-group">
+                                    <select id="receiver_id" name="receiver_id[]" class="form-control select2" multiple="multiple" data-placeholder="Kişi Seçin" style="width: 100%;" disabled>
+                                        @foreach($users as $user)
+                                            @if($readSupport->receiver_id == $user->id)
+                                                <option selected value="{{$user->id}}">{{$user->name}}</option>
+                                                @else
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                             @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input name="title" class="form-control" value="{{$readSupport->title}}" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="detail" name="detail" class="form-control" style="height: 300px" placeholder="Mesaj'ınızı Buraya Yazınız..."></textarea>
+                                </div>
+                                {{--<div class="form-group">
+                                    <div class="btn btn-default btn-file">
+                                        <i class="fa fa-paperclip"></i> Attachment
+                                        <input type="file" name="attachment">
+                                    </div>
+                                    <p class="help-block">Max. 32MB</p>
+                                </div>--}}
+                                <div class="modal-footer">
+                                    <a href="{{URL::to('admin/support')}}" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> İptal</a>
+                                    <button id="supportSaveBtn" type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Mesajı Gönder</button>
+                                </div>
+                            </form>
                         </div><!-- /.box-footer -->
                     </div><!-- /. box -->
                 </div><!-- /.col -->

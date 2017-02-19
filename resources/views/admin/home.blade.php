@@ -131,7 +131,7 @@
               <tbody>
               @foreach($five_customers as $five_customer)
               <tr>
-                <td>{{$five_customer->name}}</td>
+                <td><a href="{{URL::to('admin/customers/edit/'.$five_customer->id)}}">{{$five_customer->name.' '.$five_customer->surname}}</a></td>
                 <td>{{$five_customer->gsm}}</td>
                 <td>{{\Carbon\Carbon::parse($five_customer->created_at)->format('d/m/Y')}}</td>
                 <td>{{$five_customer->adres}}</td>

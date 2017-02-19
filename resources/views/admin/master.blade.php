@@ -236,24 +236,32 @@
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success"><?php echo count($allContact); ?></span>
+                  <?php
+                      $allSupport =\Illuminate\Support\Facades\DB::table('support')
+                          ->join('users','support.sender_id','=','users.id')
+                          ->where('support.receiver_id',Auth::user()->id)
+                          ->where('support.status',1)->where('read',0)
+                          ->select('support.*','users.name as user_name')
+                          ->get();
+                    ?>
+                  <span class="label label-success"><?php echo count($allSupport); ?></span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header"><?php echo count($allContact); ?> Yeni Mesajınız Var</li>
+                  <li class="header"><?php echo count($allSupport); ?> Yeni Mesajınız Var</li>
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <?php foreach ($allContact as $key => $contacts): ?>
-                        <li><!-- start message -->
-                        <a href="/admin/contacts">
+                      <?php foreach ($allSupport as $key => $support): ?>
+                        <li style="background-color: #f7ecb5"><!-- start message -->
+                        <a href="{{URL::to('/admin/support/read-support/'.$support->id)}}">
                           <div class="pull-left">
                             <img src="/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
-                            {{$contacts->name}}
+                            {{$support->user_name}}
                             <small><i class="fa fa-clock-o"></i>
-                            <?php 
-                            $date1 = new DateTime($contacts->created_at);
+                            <?php
+                            $date1 = new DateTime($support->created_at);
                              $date2 = \Carbon\Carbon::now();
                              $diff=date_diff($date2,$date1);
                              if($diff->d>1)
@@ -270,14 +278,14 @@
                               ?> Önce
                             </small>
                           </h4>
-                          <p>{{$contacts->subject}}</p>
+                          <p>{{$support->title}}</p>
                         </a>
                       </li><!-- end message -->
                       <?php endforeach ?>
                       
                     </ul>
                   </li>
-                  <li class="footer"><a href="/admin/contacts">Tüm Mesajlar</a></li>
+                  <li class="footer"><a href="{{URL::to('admin/support')}}">Tüm Mesajlar</a></li>
                 </ul>
               </li>
               <!-- Notifications: style can be found in dropdown.less -->

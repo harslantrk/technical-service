@@ -174,6 +174,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/support/trash','Admin\SupportController@trash');
     Route::get('/admin/support/read-support/{id}','Admin\SupportController@readSupport');
     Route::get('/admin/support/delete/{id}','Admin\SupportController@deleteSupport');
+    Route::get('/admin/support/reply-support/{id}','Admin\SupportController@replySupport');
 
     Route::post('/admin/support/supportSave','Admin\SupportController@supportSave');
 

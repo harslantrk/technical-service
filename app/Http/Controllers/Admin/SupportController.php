@@ -33,9 +33,7 @@ class SupportController extends Controller
         }
         $user_id = Auth::user()->id;
         $support = $this->supportGetir($user_id,'receiver');
-        $user = User::where('status',1)
-                    ->where('id','!=',$user_id)
-                    ->get();
+        $user = $this->user($user_id);
         $read = $this->supportGetir($user_id,'read_count');
         /*echo '<pre>';
         print_r($support);
@@ -91,9 +89,7 @@ class SupportController extends Controller
         $support = $this->supportGetir($user_id,'sender');
         $read = $this->supportGetir($user_id,'read_count');
 
-        $user = User::where('status',1)
-            ->where('id','!=',$user_id)
-            ->get();
+        $user = $this->user($user_id);
         /*echo '<pre>';
         print_r($support);
         die();*/
@@ -138,6 +134,13 @@ class SupportController extends Controller
         }
         return $support;
     }
+    public function user($user_id)
+    {
+        $user = User::where('status',1)
+            ->where('id','!=',$user_id)
+            ->get();
+        return $user;
+    }
 
     public function readSupport($id)
     {
@@ -175,14 +178,30 @@ class SupportController extends Controller
         $support = $this->supportGetir($user_id,'trash');
         $read = $this->supportGetir($user_id,'read_count');
 
-        $user = User::where('status',1)
-            ->where('id','!=',$user_id)
-            ->get();
+        $user = $this->user($user_id);
         /*echo '<pre>';
         print_r($support);
         die();*/
         return view('admin.support.trash',[
             'deleg' => $this->sess,
+            'supports' => $support,
+            'users' => $user,
+            'reads' => $read
+        ]);
+    }
+
+    public function replySupport($id)
+    {
+        $user_id = Auth::user()->id;
+        $support = $this->supportGetir($user_id,'receiver');
+        $read = $this->supportGetir($user_id,'read_count');
+        $readSupport = Support::where('id',$id)
+            ->get();
+
+        $user = $this->user($user_id);
+        return view('admin.support.reply-support',[
+            'deleg' => $this->sess,
+            'readSupports' => $readSupport,
             'supports' => $support,
             'users' => $user,
             'reads' => $read

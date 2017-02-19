@@ -117,7 +117,7 @@
                                                     @if($deleg['d'] == 1)
                                                         <a href="{{URL::to('admin/support/delete/'.$support->id)}}"  class="btn btn-danger btn-sm" title="Çöpe Gönder"><i class="fa fa-trash-o"></i></a>
                                                     @endif
-                                                    <a class="btn btn-primary btn-sm" title="Yanıtla"><i class="fa fa-reply"></i></a>
+                                                    <a href="{{URL::to('admin/support/reply-support/'.$support->id)}}" class="btn btn-primary btn-sm" title="Yanıtla"><i class="fa fa-reply"></i></a>
                                                 </div><!-- /.btn-group -->
                                             </div>
                                         </td>

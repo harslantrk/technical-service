@@ -44,7 +44,7 @@
                    <select name="customer_id" class="select2 form-control" style="width: 100%">
                      <option selected disabled>Müşteri Seçiniz</option>
                      @foreach($customers as $customer)
-                       <option value="{{$customer->id}}">{{$customer->name}}</option>
+                       <option value="{{$customer->id}}">{{$customer->name.' '.$customer->surname}}</option>
                      @endforeach
                    </select>
                   </div>
