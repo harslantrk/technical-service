@@ -54,10 +54,10 @@
                   <select name="customer_id" class="select2 form-control" style="width: 100%">
                     <option disabled>Müşteri Seçiniz</option>
                     @foreach($customers as $customer)
-                      @if($service->id == $customer->id)
-                      <option selected value="{{$customer->id}}">{{$customer->name}}</option>
+                      @if($service->customer_id == $customer->id)
+                      <option selected value="{{$customer->id}}">{{$customer->name.' '.$customer->surname}}</option>
                       @else
-                      <option value="{{$customer->id}}">{{$customer->name}}</option>
+                      <option value="{{$customer->id}}">{{$customer->name.' '.$customer->surname}}</option>
                       @endif
                     @endforeach
                   </select>
@@ -69,7 +69,7 @@
                   <select name="product_id" class="select2 form-control" style="width: 100%">
                     <option disabled>Ürün Seçiniz</option>
                     @foreach($products as $product)
-                      @if($service->id == $product->id)
+                      @if($service->product_id == $product->id)
                         <option selected value="{{$product->id}}">{{$product->name}}</option>
                         @else
                         <option value="{{$product->id}}">{{$product->name}}</option>

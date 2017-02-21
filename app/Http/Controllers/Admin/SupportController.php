@@ -54,13 +54,11 @@ class SupportController extends Controller
         $data['trash'] = 0;
 
         /*echo '<pre>';
-        echo $data['receiver_id'][0];
-        echo $data['receiver_id'][1];
         echo count($data['receiver_id']);
         print_r($data);
         die();*/
         $receiverC = count($data['receiver_id']);
-        if ($receiverC > 1) {
+        //if ($receiverC > 1) {
             for ($i = 0;$i < $receiverC;$i++){
 
                 $support = new Support();
@@ -73,9 +71,9 @@ class SupportController extends Controller
                 $support->trash          = $data['trash'];
                 $support->save();
             }
-        }else {
+        /*}else {
             Support::create($data);
-        }
+        }*/
 
         return redirect()->back();
     }

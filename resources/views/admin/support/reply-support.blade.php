@@ -47,15 +47,15 @@
                     <div class="box box-primary">
                         <div class="box-body no-padding">
                             <div class="mailbox-read-info">
-                                <h3>{{$readSupport->title}}</h3>
+                                <h3>Başlık : {{$readSupport->title}}</h3>
                                 <h5>Gönderilen : {{$supports[0]->user_name}} <span class="mailbox-read-time pull-right">{{\Carbon\Carbon::parse($readSupport->created_at)->format('d M Y H:i:s')}}</span></h5>
                             </div><!-- /.mailbox-read-info -->
                             <div class="mailbox-read-message">
-                                {!! $readSupport->detail !!}
+                                Mesaj : {!! $readSupport->detail !!}
                             </div><!-- /.mailbox-read-message -->
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <form role="form" action="{{URL::to('/admin/support/supportSave')}}" method="POST">
+                            <form id="myForm" role="form" action="{{URL::to('/admin/support/supportSave')}}" method="POST">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="sender_id" value="{{Auth::user()->id}}">
                                 <div class="form-group">
@@ -70,7 +70,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input name="title" class="form-control" value="{{$readSupport->title}}" disabled>
+                                    <input id="title" name="title" class="form-control" value="{{$readSupport->title}}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <textarea id="detail" name="detail" class="form-control" style="height: 300px" placeholder="Mesaj'ınızı Buraya Yazınız..."></textarea>
@@ -94,3 +94,11 @@
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 @endsection
+@section('jscode')
+    <script>
+        $('#myForm').submit(function() {
+            $('#receiver_id').removeAttr('disabled');
+            $('#title').removeAttr('disabled');
+        });
+    </script>
+    @endsection

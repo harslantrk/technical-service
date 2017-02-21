@@ -135,6 +135,36 @@ class ServiceController extends Controller
             ServicePayment::create($data);
         }
         return redirect()->back();
+    }
 
+    public function deletePayment($id)
+    {
+        $sPayment = ServicePayment::where('id',$id)->first();
+
+        $pQuantity = $sPayment->quantity;
+        $pId = $sPayment->product_id;
+
+        ServicePayment::destroy($id);
+        $product = Product::where('id',$pId)->first();
+        $product->stock = $product->stock + $pQuantity;
+        $product->save();
+        //Product::where('id',$pId)->update(['quantity' => $pQuantity]);
+        return redirect()->back();
+    }
+    public function show($id)
+    {
+        if($this->read==0 || $this->update==0){
+            return redirect()->back();
+        }
+        $service_payments = ServicePayment::where('service_id',$id)->get();
+        $service = Service::where('id',$id)->first();
+        $customers = Customer::where('status',1)->get();
+        $products = Product::where('status',1)->get();
+        return view('admin.service.show',[
+            'service' => $service,
+            'customers' => $customers,
+            'products' => $products,
+            'service_payments' => $service_payments
+        ]);
     }
 }

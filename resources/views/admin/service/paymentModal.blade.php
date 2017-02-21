@@ -73,42 +73,44 @@
             </div><!-- ./row -->
             <div class="box box-danger">
                 <div class="box-body">
-                        <div class="col-xs-12 table-responsive">
-                            <table class="table table-striped text-center">
-                                <thead>
-                                <tr>
-                                    <th>Ürün</th>
-                                    <th>Adet</th>
-                                    <th>Birim Fiyat</th>
-                                    <th>KDV % 18</th>
-                                    <th>Toplam</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php $toplam=0;?>
-                                @foreach($service_payments as $service_payment)
-                                <tr>
-                                    <td>{{$service_payment->product->name}}</td>
-                                    <td>{{$service_payment->quantity}}</td>
-                                    <td>{{$service_payment->product->out_price}}</td>
-                                    <td>{{$service_payment->kdv}}</td>
-                                    <td>{{$service_payment->total}}</td>
-                                </tr>
-                                    <?php $toplam += $service_payment->total;?>
-                                @endforeach
-                                </tbody>
-                                <tfoot>
-                                <tr class="text-bold text-red">
-                                    <td>Genel Toplam</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>{{$toplam}}</td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                            <a href="{{URL::to('/admin/service/edit/'.$service->id)}}" class="btn btn-default"><i class="fa fa-undo"></i> Servise Git</a>
-                        </div><!-- /.col -->
+                    <div class="col-xs-12 table-responsive">
+                        <table class="table table-striped text-center">
+                            <thead>
+                            <tr>
+                                <th>Ürün</th>
+                                <th>Adet</th>
+                                <th>Birim Fiyat</th>
+                                <th>KDV % 18</th>
+                                <th>Toplam</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $toplam=0;?>
+                            @foreach($service_payments as $service_payment)
+                            <tr>
+                                <td>{{$service_payment->product->name}}</td>
+                                <td>{{$service_payment->quantity}}</td>
+                                <td>{{$service_payment->product->out_price}}</td>
+                                <td>{{$service_payment->kdv}}</td>
+                                <td>{{$service_payment->total}}</td>
+                                <td><a href="{{URL::to('admin/service/deletePayment/'.$service_payment->id)}}" class="btn btn-danger" title="{{$service_payment->product->name}} Sil"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                                <?php $toplam += $service_payment->total;?>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            <tr class="text-bold text-red">
+                                <td>Genel Toplam</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{$toplam}}</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <a href="{{URL::to('/admin/service/edit/'.$service->id)}}" class="btn btn-default"><i class="fa fa-undo"></i> Servise Git</a>
+                    </div><!-- /.col -->
                 </div>
             </div>
         </section><!-- /.content -->

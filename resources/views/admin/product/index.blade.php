@@ -11,9 +11,6 @@
         <section class="content-header">
           <h1>
             Tüm Ürünler
-           @if($deleg['a'] == 1)
-              <a href="{{URL::to('/admin/product/create')}}" class="btn btn-primary">Ürün Ekle</a>
-           @endif
           </h1>
           <ol class="breadcrumb">
             <li><a href="{{URL::to('/admin')}}"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
@@ -24,6 +21,11 @@
         <!-- Main content -->
         <section class="content">
           <div class="row">
+            @if($deleg['a'] == 1)
+              <div class="col-sm-12">
+                <a href="{{URL::to('/admin/product/create')}}" class="btn btn-primary">Ürün Ekle</a>
+              </div>
+            @endif
             <div class="col-xs-12 col-sm-12">
               <div class="box">
                 <!--<div class="box-header">

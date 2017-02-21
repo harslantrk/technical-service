@@ -87,19 +87,23 @@
             <table class="table no-margin">
               <thead>
               <tr>
-                <th>Servis No</th>
+                <th>No</th>
                 <th>Müşteri</th>
                 <th>Ürün</th>
+                <th>Müşteri Sorunu</th>
                 <th>Tarih</th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
               @foreach($five_services as $five_service)
               <tr>
                 <td>{{$five_service->id}}</td>
-                <td>{{$five_service->customer->name}}</td>
+                <td>{{$five_service->customer->name.' '.$five_service->customer->surname}}</td>
                 <td>{{$five_service->product->name}}</td>
+                <td>{{$five_service->customer_fault}}</td>
                 <td>{{\Carbon\Carbon::parse($five_service->created_at)->format('d/m/Y')}}</td>
+                <td><a href="{{URL::to('admin/service/show/'.$five_service->id)}}" class="btn btn-xs btn-primary" title="{{$five_service->product->name}} Git"><i class="fa fa-search"></i></a></td>
               </tr>
                 @endforeach
               </tbody>

@@ -18,7 +18,7 @@
           <div class="row">
           @if($deleg['a']==1)
           <div class="col-lg-12">
-				<a href="/admin/service/create" class="button btn btn-primary">Servis Ekle</a>
+				<a href="{{URL::to('/admin/service/create')}}" class="btn btn-primary">Servis Ekle</a>
 			</div>
           @endif
             <div class="col-xs-12">
@@ -48,7 +48,7 @@
                                 <tr class="bg-yellow-gradient text-bold">
                             @endif
                             <td>{{$no}}</td>
-                            <td>{{$service->customer->name}}</td>
+                            <td>{{$service->customer->name.' '.$service->customer->surname}}</td>
                             <td>{{$service->product->name}}</td>
                             <td>{{$service->customer_fault}}</td>
                             <td>@if($service->warranty == 1) Var @else Yok @endif</td>

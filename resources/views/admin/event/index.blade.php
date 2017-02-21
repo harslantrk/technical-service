@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('content')
-    <?php setlocale(LC_ALL,'tr_TR.UTF-8');?>
+    <?php setlocale(LC_ALL,'TR');?>
     @if($deleg['u'] == 0 && $deleg['d'] == 0 && $deleg['a'] == 0)
         <script type="text/javascript">
             alert('Sadece Görüntüleme Yetkisine Sahipsiniz !');
