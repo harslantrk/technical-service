@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         $user->name = 'Sefa Kendirli';
         $user->username = 'blacq0o';
         $user->email = 'sefa.kendirli@gmail.com';
-        $user->password = bcrypt('s2ua35246');
+        $user->password = bcrypt('123456789');
         $user->group_id = 2;
         $user->sms_code = 61031;
         $user->status = 1;

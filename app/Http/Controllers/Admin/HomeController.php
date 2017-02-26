@@ -31,7 +31,13 @@ class HomeController extends Controller
         $products = Product::where('status',1)->orderBy('created_at','desc')->get();
         $brand = Brand::all()->count();
         $customer = Customer::all()->count();
+
         $comments = Comment::orderBy('status','asc')->get();
+        $commentCount = Comment::all()->count();
+
+        /*echo '<pre>';
+        print_r($comments);
+        die();*/
         return view('admin.home',[
             'brand' => $brand,
             'customer' => $customer,
@@ -39,7 +45,8 @@ class HomeController extends Controller
             'service' => $service,
             'five_services' => $five_services,
             'five_customers' => $five_customers,
-            'comments'=>$comments
+            'comments'=>$comments,
+            'commentCount' => $commentCount
         ]);
     }
 }

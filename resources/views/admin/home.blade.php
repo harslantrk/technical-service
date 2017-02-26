@@ -171,14 +171,20 @@
             </tr>
             </thead>
             <tbody>
-            <?php $sira = 1;?>
+            <?php
+              $sira = 1;
+              $status1 = 0;
+              $status0 = 0;
+            ?>
             @foreach($comments as $comment)
               <tr>
                 <th>{{$sira}}</th>
                   @if($comment->status == 1)
+                    <?php $status1++;?>
                   <th><a href="/admin/product/show/{{$comment->product_id}}">{{$comment->product->name}}</a></th>
                   @else
                   <th>{{$comment->product->name}}</th>
+                      <?php $status0++;?>
                   @endif
                 <th>{{$comment->user->name}}</th>
                 <th>{{$comment->comment}}</th>
@@ -247,7 +253,53 @@
 
     </section><!-- right col -->
   </div><!-- /.row (main row) -->
+  <div class="row">
+    <!-- Left col -->
+    <section class="col-md-6 connectedSortable">
+      <!-- TO DO List -->
+      <div class="box box-primary">
+        <div class="box-header">
+          <i class="ion ion-clipboard"></i>
+          <h3 class="box-title">Yorum Grafikleri</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </section><!-- /.Left col -->
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-md-6 connectedSortable">
+      <!-- Calendar -->
+      <div class="box box-danger">
+        <div class="box-header">
+          <i class="fa fa-book"></i>
+          <h3 class="box-title">Ürünler</h3>
+          <!-- tools box -->
+        </div><!-- /.box-header -->
+        <div class="box-body">
 
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+
+    </section><!-- right col -->
+  </div><!-- /.row (main row) -->
 </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
+@endsection
+@section('jscode')
+  <script>
+      $(function () {
+          var donut = new Morris.Donut({
+              element: 'sales-chart',
+              resize: true,
+              colors: ["#3c8dbc", "#f56954", "#00a65a"],
+              data: [
+                  {label: "Toplam Yorum", value: {{$commentCount}}},
+                  {label: "Onaylanmamış Yorumlar", value: {{$status0}}},
+                  {label: "Onaylanmış Yorumlar", value: {{$status1}}}
+              ],
+              hideHover: 'auto'
+          });
+      });
+  </script>
 @endsection

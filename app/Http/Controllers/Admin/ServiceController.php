@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Customer;
 use App\Product;
 use App\ServicePayment;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -166,5 +167,69 @@ class ServiceController extends Controller
             'products' => $products,
             'service_payments' => $service_payments
         ]);
+    }
+
+    public function excelDownload($id)
+    {
+        $service = Service::where('id',$id)->first();
+
+        Excel::create(Carbon::now()->format('d/m/Y').' Servis Çıktısı',function ($excel) use($service){
+            $excel->sheet('Servis',function ($sheet) use($service){
+
+                $row = 9;
+                $sheet->setAutoSize(true);
+
+                $sheet->mergeCells('A1:E1');
+                $sheet->row(1,[$service->id.' numaralı Servis Bilgi Formu']);
+
+                $sheet->setBorder('A2:A6','thin');
+                $sheet->cells('A1:E6',function ($cells){
+                    $cells->setFont([
+                        'family' => 'Calibri',
+                        'size'   => '16',
+                        'bold'   => true
+                    ]);
+                });
+                for ($i=2;$i<7;$i++) {
+                    $sheet->mergeCells('B'.$i.':E'.$i);
+                }
+                $sheet->row(2,['Müşteri',$service->customer->name.' '.$service->customer->surname]);
+                $sheet->row(3,['Gelen Ürün',$service->product->name]);
+                $sheet->row(4,['Bildirilen Hata',$service->customer_fault]);
+                $sheet->row(6,['Yapılan İşlem',$service->process]);
+                if ($service->warranty == 1) {
+                    $sheet->row(5,['Garanti','Var']);
+                }else{
+                    $sheet->row(5,['Garanti','Yok']);
+                }
+                $sheet->cells('A8:E8',function ($cells){
+                    $cells->setBackground('#e69988');
+                    $cells->setFont([
+                        'family' => 'Calibri',
+                        'size'   => '16',
+                        'bold'   => true
+                    ]);
+                    $cells->setAlignment('center');
+                });
+                $sheet->setBorder('A8:E8','thin');
+                $sheet->row(8,['Ürün Adı','Adet','Birim Fiyat',' KDV %(18)','Toplam']);
+
+                $servicePayments = ServicePayment::where('service_id',$service->id)->get();
+                $total = 0;
+                foreach ($servicePayments as $servicePayment) {
+                    $total = $total + $servicePayment->total;
+                    $sheet->row($row,[
+                        $servicePayment->product->name,
+                        $servicePayment->quantity,
+                        $servicePayment->product->out_price,
+                        $servicePayment->kdv,
+                        $servicePayment->total
+                    ]);
+                    $row++;
+                }
+                $sheet->row($row+1,['Genel Toplam',' ',' ',' ',$total]);
+
+            });
+        })->export('xls');
     }
 }
