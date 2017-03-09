@@ -8,10 +8,9 @@
     TEKNİK SERVİS
     <small>Teknik Servis Listesi</small>
   </h1>
-  <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
-    <li><a href="/admin/service"><i class="fa fa-dashboard active"></i> Teknik Servis</a></li>
-  </ol>
+    <ol class="breadcrumb">
+        <li><a href="{{URL::to('/admin')}}"><i class="fa fa-dashboard"></i>Ana Sayfa</a></li>
+    </ol>
 </section>
         <!-- Main content -->
         <section class="content">
@@ -53,13 +52,16 @@
                             <td>{{$service->customer_fault}}</td>
                             <td>@if($service->warranty == 1) Var @else Yok @endif</td>
                             <td>{{\Carbon\Carbon::parse($service->created_at)->format('d/m/Y H:i:s')}}</td>
-                            <td>
+                            <td class="col-sm-2">
+                                <a href="{{URL::to('admin/service/show/'.$service->id)}}" class="btn btn-primary" title="Servisi Görüntüle"><i class="fa fa-search"></i></a>
                                 @if($deleg['u']==1)<a href="/admin/service/edit/{{$service->id}}" title="Servisi Güncelle" class="button btn btn-warning"><i class="fa fa-edit"></i></a>@endif
                                 @if($deleg['d']==1)<a onclick="deleteApprove('/admin/service/delete/{{$service->id}}')" title="Servisi Sil" class="button btn btn-danger"><i class="fa fa-trash"></i></a>@endif
                                 @if($service->process)
-                                  <a onclick="serviceClose('/admin/service/serviceClose/{{$service->id}}')" title="Servisi Kapat !" class="button btn btn-default"><i class="fa fa-close"></i></a>
-                                  <a href="{{URL::to('/admin/service/paymentModalView/'.$service->id)}}" title="Ücret Girişi !" class="button btn btn-default try"><i class="fa fa-try"></i></a>
-                                  <a href="{{URL::to('/admin/service/ExcelDownload/'.$service->id)}}" title="Excel indir" class="btn btn-success"><i class="fa fa-file-excel-o"></i></a>
+                                  @if($deleg['d'] == 1)
+                                        <a onclick="serviceClose('/admin/service/serviceClose/{{$service->id}}')" title="Servisi Kapat !" class="button btn btn-default"><i class="fa fa-close"></i></a>
+                                        <a href="{{URL::to('/admin/service/paymentModalView/'.$service->id)}}" title="Ücret Girişi !" class="button btn btn-default try"><i class="fa fa-try"></i></a>
+                                      @endif
+                                      <a href="{{URL::to('/admin/service/ExcelDownload/'.$service->id)}}" title="Excel indir" class="btn btn-success"><i class="fa fa-file-excel-o"></i></a>
                                 @endif
                             </td>
                             </tr>

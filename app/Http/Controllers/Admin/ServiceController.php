@@ -154,7 +154,7 @@ class ServiceController extends Controller
     }
     public function show($id)
     {
-        if($this->read==0 || $this->update==0){
+        if($this->read==0){
             return redirect()->back();
         }
         $service_payments = ServicePayment::where('service_id',$id)->get();

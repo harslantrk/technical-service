@@ -113,7 +113,6 @@
                 <div class="pull-right">
                   <a href="{{URL::to('/admin/service')}}" class="btn btn-default non-print"><i class="fa fa-pencil"></i> İptal</a>
                   <button type="submit" class="btn btn-primary non-print"><i class="fa fa-envelope-o"></i> Güncelle</button>
-                  <a onclick="window.print()" class="btn btn-success non-print" data-toggle="modal" data-target="#modalPrint"><i class="fa fa-print"></i> Yazdır</a>
                 </div>
               </div><!-- /.box-footer -->
             </div><!-- /. box -->

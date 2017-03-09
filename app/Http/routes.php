@@ -288,6 +288,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/event/editModal','Admin\EventController@editModal');
     //Takvim İşlemleri Bitiş
 
+    Route::get('/admin/user_auth','Admin\UserAuthController@index');
+
+    Route::post('/admin/user_auth/saveAuth','Admin\UserAuthController@save');
 });
 
 
