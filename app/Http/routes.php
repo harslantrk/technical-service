@@ -291,6 +291,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/user_auth','Admin\UserAuthController@index');
 
     Route::post('/admin/user_auth/saveAuth','Admin\UserAuthController@save');
+
+
+    Route::get('/admin/instagram','Admin\HomeController@instagram');
 });
 
 

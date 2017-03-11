@@ -49,4 +49,20 @@ class HomeController extends Controller
             'commentCount' => $commentCount
         ]);
     }
+
+    public function instagram(Request $request)
+    {
+        $items = [];
+
+        if($request->has('username')){
+
+            $client = new \GuzzleHttp\Client;
+            $url = sprintf('https://www.instagram.com/%s/media', $request->input('username'));
+            $response = $client->get($url);
+            $items = json_decode((string) $response->getBody(), true)['items'];
+
+        }
+
+        return view('admin.instagram.index',compact('items'));
+    }
 }
