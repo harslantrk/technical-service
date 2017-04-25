@@ -237,12 +237,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
                   <?php
-                      $allSupport =\Illuminate\Support\Facades\DB::table('support')
-                          ->join('users','support.sender_id','=','users.id')
-                          ->where('support.receiver_id',Auth::user()->id)
-                          ->where('support.status',1)->where('read',0)
-                          ->select('support.*','users.name as user_name')
-                          ->get();
+                      $allSupport = \App\Helpers\Helper::mesajlar(Auth::user()->id,1,0);
                     ?>
                   <span class="label label-success"><?php echo count($allSupport); ?></span>
                 </a>
@@ -251,7 +246,7 @@
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
-                      <?php foreach ($allSupport as $key => $support): ?>
+                      @foreach ($allSupport as $key => $support)
                         <li style="background-color: #f7ecb5"><!-- start message -->
                         <a href="{{URL::to('/admin/support/read-support/'.$support->id)}}">
                           <div class="pull-left">
@@ -260,28 +255,13 @@
                           <h4>
                             {{$support->user_name}}
                             <small><i class="fa fa-clock-o"></i>
-                            <?php
-                            $date1 = new DateTime($support->created_at);
-                             $date2 = \Carbon\Carbon::now();
-                             $diff=date_diff($date2,$date1);
-                             if($diff->d>1)
-                             {
-                                 $result=$diff->d." Gün";
-                             }
-                             elseif($diff->h==0){
-                                 $result=$diff->i." Dakika";
-                             }
-                             else{
-                                 $result=$diff->h." Saat";
-                             }
-                             echo $result;
-                              ?> Önce
+                            {{\App\Helpers\Helper::trDiff($support->created_at).' Önce'}}
                             </small>
                           </h4>
                           <p>{{$support->title}}</p>
                         </a>
                       </li><!-- end message -->
-                      <?php endforeach ?>
+                      @endforeach
                       
                     </ul>
                   </li>

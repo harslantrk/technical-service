@@ -7,11 +7,12 @@
  */
 namespace App\Helpers;
 use App\User;
+use Carbon\Carbon;
 use Session;
 use App\Modules;
 use Auth;
 use App\UserDelegation;
-
+use Illuminate\Support\Facades\DB;
 
 
 class Helper
@@ -55,5 +56,25 @@ class Helper
         $replace = array('OCAK', 'ŞUBAT', 'MART', 'NİSAN', 'MAYIS', 'HAZİRAN', 'TEMMUZ', 'AĞUSTOS', 'EYLÜL', 'EKİM', 'KASIM'    , 'ARALIK');
         $newMonth=str_replace($search, $replace, $oldMonth);
         return $newMonth;
+    }
+
+    // Zaman farkını türkçe olarak geri döndürme.
+    public static function trDiff($tarih)
+    {
+        Carbon::setLocale('tr');
+        $result = Carbon::parse($tarih)->diffForHumans();
+        return $result;
+    }
+
+    public static function mesajlar($user,$status,$read)
+    {
+        $result = DB::table('support')
+            ->join('users','support.sender_id','=','users.id')
+            ->where('support.receiver_id',$user)
+            ->where('support.status',$status)->where('read',$read)
+            ->select('support.*','users.name as user_name')
+            ->get();
+
+        return $result;
     }
 }

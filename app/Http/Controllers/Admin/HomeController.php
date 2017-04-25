@@ -60,6 +60,9 @@ class HomeController extends Controller
             $url = sprintf('https://www.instagram.com/%s/media', $request->input('username'));
             $response = $client->get($url);
             $items = json_decode((string) $response->getBody(), true)['items'];
+            /*echo '<pre>';
+            var_dump($items);
+            die();*/
 
         }
 
