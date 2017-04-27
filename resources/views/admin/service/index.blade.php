@@ -28,7 +28,7 @@
                 <div class="box-body">
                   <table id="service_table" class="table table-bordered table-striped">
                     <thead>
-                      <tr class="bg-red-gradient">
+                      <tr>
                       	<th class="col-sm-1">#</th>
                       	<th>Müşteri</th>
                       	<th>Ürün</th>

@@ -47,10 +47,8 @@
                   @endif
               </div><!-- /.box-header -->
               <div class="box-body">
-                <div class="input-group form-group">
-                  <div class="input-group-addon">
-                    Müşteri Seç
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Müşteri Seç</label>
                   <select name="customer_id" class="select2 form-control" style="width: 100%">
                     <option disabled>Müşteri Seçiniz</option>
                     @foreach($customers as $customer)
@@ -62,10 +60,8 @@
                     @endforeach
                   </select>
                 </div>
-                <div class="input-group form-group">
-                  <div class="input-group-addon">
-                    Ürün Seç
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Ürün Seç</label>
                   <select name="product_id" class="select2 form-control" style="width: 100%">
                     <option disabled>Ürün Seçiniz</option>
                     @foreach($products as $product)
@@ -77,35 +73,25 @@
                     @endforeach
                   </select>
                 </div>
-                <div class="input-group form-group">
-                  <div class="input-group-addon">
-                    Bildirilen Hata
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Bildirilen Hata</label>
                   <input value="{{$service->customer_fault}}" class="form-control" type="text" name="customer_fault" placeholder="Müşteri Tarfından Söylenilen Sorun..">
                 </div>
-                <div class="input-group form-group">
-                  <div class="input-group-addon">
-                    Ürün Emanetleri
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Ürün Emanetleri</label>
                   <input value="{{$service->deposit}}" class="form-control" type="text" name="deposit" placeholder="Ürün ile Gelen Eşyalar...">
                 </div>
-                <div class="input-group form-group">
-                  <div class="input-group-addon">
-                    Garanti
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Garanti Durumu</label><br>
                   <input type="radio" name="warranty" class="minimal" value="1" @if($service->warranty == 1) checked @endif> Var
                   <input type="radio" name="warranty" class="minimal" value="0" @if($service->warranty == 0) checked @endif> Yok
                 </div>
-                <div class="input-group form-group">
-                  <div class="input-group-addon">
-                    Yapılan İşlemler
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Yapılan İşlemler</label>
                   <textarea class="form-control" name="process" rows="10">{{$service->process}}</textarea>
                 </div>
-              <div class="input-group form-group">
-                  <div class="input-group-addon">
-                      Müşteriye Varsa Öneri
-                  </div>
+                <div class="form-group">
+                  <label class="control-label">Müşteriye Varsa Öneri</label>
                   <textarea class="form-control" name="process_proposal" rows="5">{{$service->process_proposal}}</textarea>
               </div>
               </div><!-- /.box-body -->

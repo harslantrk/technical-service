@@ -1,42 +1,24 @@
-@extends('admin.master')
-
-@section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Ürün Türü
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="/admin"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
-                <li><a href="{{URL::to('/admin/product_type')}}"><i class="fa fa-dashboard active"></i> Ürün Türü</a></li>
-            </ol>
-        </section>
-        <!-- Main content -->
-        <section class="content">
-            <!-- general form elements -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Yeni Ürün Türü Ekleme</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form role="form" method="post" action="{{URL::to('/admin/product_type/save')}}">
-                    {!! csrf_field() !!}
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label class="control-label">Ürün Türü</label>
-                            <input type="text" class="form-control" name="product_type">
-                        </div>
-                    </div><!-- /.box-body -->
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-hdd-o"></i> Kaydet</button>
-                        <a href="{{URL::to('/admin/product_type')}}" class="button btn btn-default"><i class="fa fa-undo"></i> Geri</a>
+<div class="modal-dialog" role="document">
+    <form role="form" action="{{URL::to('/admin/product_type/save')}}" method="POST">
+        {{ csrf_field() }}
+        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Yeni Ürün Türü Ekle</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label>Ürün Türü</label>
+                        <input class="form-control" type="text" name="product_type">
                     </div>
-                </form>
-            </div><!-- /.box -->
-
-        </section><!-- /.content -->
-
-    </div><!-- /.content-wrapper -->
-@endsection
+                </div><!-- /.box-body -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                <button id="product_typeSaveBtn" type="submit" class="btn btn-primary">Ürün Türü Ekle</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </form>
+</div><!-- /.modal-dialog -->

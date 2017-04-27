@@ -19,7 +19,7 @@
             <div class="row">
                 @if($deleg['a']==1)
                     <div class="col-lg-12">
-                        <a href="/admin/brand/create" class="button btn btn-primary">Marka Ekle</a>
+                        <a href="#" id="createBrand" class="button btn btn-primary" data-toggle="modal" data-target="#modalYeniMarka">Marka Ekle</a>
                     </div>
                 @endif
                 <div class="col-xs-12">
@@ -65,4 +65,34 @@
             </div><!-- /.row -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+    <!-- Randevu Ekleme Modeli -->
+    <div class="modal fade" id="modalYeniMarka" tabindex="-1" role="dialog">
+
+    </div>
+    <!-- /.modal -->
+@endsection
+@section('jscode')
+    <script>
+        $('#createBrand').click(function () {
+            var deger = 'a';
+            /*console.log($(this).attr('name'));*/
+            $.ajax({
+                url: '/admin/brand/create',
+                type: 'POST',
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                cache: false,
+                data: {deger: deger},
+                success: function(data){
+                    document.getElementById('modalYeniMarka').innerHTML=data;
+                },
+                error: function(jqXHR, textStatus, err){}
+            });
+        });
+    </script>
 @endsection

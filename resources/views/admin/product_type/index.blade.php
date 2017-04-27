@@ -19,7 +19,7 @@
             <div class="row">
                 @if($deleg['a']==1)
                     <div class="col-lg-12">
-                        <a href="{{URL::to('/admin/product_type/create')}}" class="button btn btn-primary">Ürün Türü Ekle</a>
+                        <a href="#" id="YeniUrunTuru" class="button btn btn-primary" data-toggle="modal" data-target="#modalYeniUrunTuru">Ürün Türü Ekle</a>
                     </div>
                 @endif
                 <div class="col-xs-12">
@@ -65,4 +65,34 @@
             </div><!-- /.row -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+    <!-- Ürün Türü Ekleme Modeli -->
+    <div class="modal fade" id="modalYeniUrunTuru" tabindex="-1" role="dialog">
+
+    </div>
+    <!-- /.modal -->
+@endsection
+@section('jscode')
+    <script>
+        $('#YeniUrunTuru').click(function () {
+            var deger = 'a';
+            /*console.log($(this).attr('name'));*/
+            $.ajax({
+                url: '/admin/product_type/create',
+                type: 'POST',
+                beforeSend: function (xhr) {
+                    var token = $('meta[name="csrf_token"]').attr('content');
+
+                    if (token) {
+                        return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                    }
+                },
+                cache: false,
+                data: {deger: deger},
+                success: function(data){
+                    document.getElementById('modalYeniUrunTuru').innerHTML=data;
+                },
+                error: function(jqXHR, textStatus, err){}
+            });
+        });
+    </script>
 @endsection

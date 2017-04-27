@@ -25,10 +25,8 @@
                                 <h3 class="box-title">{{$service->id}} Numaralı Servis</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="input-group form-group">
-                                    <div class="input-group-addon">
-                                        Ürünler
-                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">Ürünler</label>
                                     <select onchange="degis(this)" id="product_id" name="product_id" class="select2 form-control" style="width: 100%">
                                         <option selected disabled>Ürün Seç</option>
                                         @foreach($products as $product)
@@ -37,28 +35,20 @@
                                     </select>
                                     <input type="hidden" id="stock">
                                 </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-addon">
-                                        Adet
-                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">Adet</label>
                                     <input class="form-control" type="number" id="quantity"  name="quantity" placeholder="Ürün Adeti..">
                                 </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-addon">
-                                        Birim Fiyat
-                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">Birim Fiyat</label>
                                     <input class="form-control" type="number" id="unit_price" name="unit_price" placeholder="Ürün Fiyatı..." readonly>
                                 </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-addon">
-                                        KDV % 18
-                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">KDV %18</label>
                                     <input class="form-control" type="number" id="kdv" name="kdv" placeholder="Toplam KDV..." readonly>
                                 </div>
-                                <div class="input-group form-group">
-                                    <div class="input-group-addon">
-                                        Toplam
-                                    </div>
+                                <div class="form-group">
+                                    <label class="control-label">Toplam</label>
                                     <input class="form-control" type="number" id="total" name="total" placeholder="Toplam Fiyat" readonly>
                                 </div>
                             </div><!-- /.box-body -->

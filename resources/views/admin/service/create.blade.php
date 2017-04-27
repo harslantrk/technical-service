@@ -30,28 +30,24 @@
 <section class="content">
         <div class="row">
             <div class="col-md-12">
-            <form method="post" action="/admin/service/save">
+            <form method="post" action="{{URL::to('/admin/service/save')}}">
               {!! csrf_field() !!}
               <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Yeni Servis</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Müşteri Seç
-                    </div>
-                   <select name="customer_id" class="select2 form-control" style="width: 100%">
-                     <option selected disabled>Müşteri Seçiniz</option>
-                     @foreach($customers as $customer)
-                       <option value="{{$customer->id}}">{{$customer->name.' '.$customer->surname}}</option>
-                     @endforeach
-                   </select>
+                  <div class="form-group">
+                    <label class="control-label">Müşteri Seç</label>
+                    <select name="customer_id" class="select2 form-control" style="width: 100%">
+                      <option selected disabled>Müşteri Seçiniz</option>
+                      @foreach($customers as $customer)
+                        <option value="{{$customer->id}}">{{$customer->name.' '.$customer->surname}}</option>
+                      @endforeach
+                    </select>
                   </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Ürün Seç
-                    </div>
+                  <div class="form-group">
+                    <label class="control-label">Ürün Seç</label>
                     <select name="product_id" class="select2 form-control" style="width: 100%">
                       <option selected disabled>Ürün Seçiniz</option>
                       @foreach($products as $product)
@@ -59,22 +55,16 @@
                       @endforeach
                     </select>
                   </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Bildirilen Hata
-                    </div>
-                   <input class="form-control" type="text" name="customer_fault" placeholder="Müşteri Tarfından Söylenilen Sorun..">
+                  <div class="form-group">
+                    <label class="control-label">Bildirilen Hata</label>
+                    <input class="form-control" type="text" name="customer_fault" placeholder="Müşteri Tarfından Söylenilen Sorun..">
                   </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Ürün Emanetleri
-                    </div>
-                   <input class="form-control" type="text" name="deposit" placeholder="Ürün ile Gelen Eşyalar...">
+                  <div class="form-group">
+                    <label class="control-label">Ürün Emanetleri</label>
+                    <input class="form-control" type="text" name="deposit" placeholder="Ürün ile Gelen Eşyalar...">
                   </div>
-                  <div class="input-group form-group">
-                    <div class="input-group-addon">
-                      Garanti
-                    </div>
+                  <div class="form-group">
+                    <label class="control-label">Garanti Durumu</label><br>
                     <input type="radio" name="warranty" class="minimal" value="1"> Var
                     <input type="radio" name="warranty" class="minimal" value="0"> Yok
                   </div>
@@ -85,7 +75,6 @@
                     <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Kaydet</button>
                   </div>
                 </div><!-- /.box-footer -->
-
               </div><!-- /. box -->
               </form>
             </div><!-- /.col -->

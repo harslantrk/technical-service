@@ -739,8 +739,9 @@
                   text: "Eğer silerseniz, sildiğiniz veriye bir daha ulaşamayacağınızı onaylamış olursunuz!",
                   type: "warning",
                   showCancelButton: true,
-                  confirmButtonColor: "#DD6B55",
+                  confirmButtonColor: "#28DD12",
                   confirmButtonText: "Evet, veriyi sil!",
+                  cancelButtonColor: "#DD3E2D",
                   cancelButtonText: "Hayır, veriyi silme!",
                   closeOnConfirm: false,
                   closeOnCancel: false
