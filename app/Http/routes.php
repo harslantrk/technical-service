@@ -251,7 +251,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/product/show/{id}','Admin\ProductController@show'); //var olan ürünü silen fonksiyon
     Route::get('/admin/product/commentCheck/{id}','Admin\ProductController@commentCheck'); //Ürün Yorumunu Onaylama
     Route::get('/admin/product/commentUnCheck/{id}','Admin\ProductController@commentUnCheck'); //Ürün Yorumunu Kapat
-    Route::get('/admin/product/AllProductExcelExport','Admin\ProductController@AllProductExcelExport'); //Ürün Yorumunu Kapat
+    Route::get('/admin/product/AllProductExcelExport','Admin\ProductController@AllProductExcelExport'); //Excel
+    Route::get('/admin/product/ExcelExport/{text}','Admin\ProductController@ExcelExportText'); //Excel Aramalı
 
     Route::post('/admin/product/update/{id}','Admin\ProductController@update');//var olan ürünün bilgilerini güncelleyen fonksiyon
     Route::post('/admin/product/save','Admin\ProductController@save');//yeni ürün ekleyen fonksiyon

@@ -38,6 +38,7 @@
                         <td>#</td>
                         <td>Ürün Adı</td>
                         <td>Marka</td>
+                        <td>Tür</td>
                         <td>Stok</td>
                         <td>Çıkış Fiyatı</td>
                         <td>Son Güncelleme</td>
@@ -51,20 +52,30 @@
                         <th>{{$sira}}</th>
                         <th>{{$product->name}}</th>
                         <th>{{$product->brand->brand}}</th>
-                          @if($product->stock == 0)
-                          <th>
+                        <th>{{$product->product_type->product_type}}</th>
+                        @if($product->stock == 0)
+                        <th>
                             <span class="text-red"><i class="fa fa-warning"></i> Stokda Yok</span>
-
-                          </th>
-                          @else
-                          <th>{{$product->stock}}</th>
-                          @endif
+                        </th>
+                        @else
+                        <th>{{$product->stock}}</th>
+                        @endif
                         <th>{{$product->out_price}} <i class="fa fa-turkish-lira"></i></th>
                         <th>{{\Carbon\Carbon::parse($product->updated_at)->format('d/m/Y H:i:s')}}</th>
                         <th>
-                          <a title="Görüntüle" href="/admin/product/show/{{$product->id}}" class="btn btn-primary"><i class="fa fa-search"></i></a>
-                          @if($deleg['u'] == 1)<a title="Güncelle" href="/admin/product/edit/{{$product->id}}" class="btn btn-success"><i class="fa fa-edit"></i></a>@endif
-                          @if($deleg['d'] == 1)<a title="Sil" onclick="deleteApprove('/admin/product/delete/{{$product->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a> @endif
+                          <a title="Görüntüle" href="/admin/product/show/{{$product->id}}" class="btn btn-primary">
+                              <i class="fa fa-search"></i>
+                          </a>
+                          @if($deleg['u'] == 1)
+                          <a title="Güncelle" href="/admin/product/edit/{{$product->id}}" class="btn btn-success">
+                              <i class="fa fa-edit"></i>
+                          </a>
+                          @endif
+                          @if($deleg['d'] == 1)
+                          <a title="Sil" onclick="deleteApprove('/admin/product/delete/{{$product->id}}')" class="btn btn-danger">
+                              <i class="fa fa-trash"></i>
+                          </a>
+                          @endif
                         </th>
                       </tr>
                       <?php $sira++;?>
@@ -74,7 +85,7 @@
                     <!-- Trigger the modal with a button -->
                   </table>
                   <div>
-                    <a href="/admin/product/AllProductExcelExport" class="btn btn-success"><i class="fa fa-file-excel-o"> Excel Çıktısı</i></a>
+                    <a id="excel" href="{{URL::to('/admin/product/AllProductExcelExport')}}" class="btn btn-success"><i class="fa fa-file-excel-o"> Excel Çıktısı</i></a>
                   </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -82,4 +93,20 @@
           </div><!-- /.row -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+@endsection
+@section('jscode')
+  <script type="text/javascript">
+      $(function() {
+          $('#product_table_filter input').keyup(function () {
+              var text = $('#product_table_filter input').val();
+              var excel = document.getElementById('excel');
+              console.log(text.length);
+              if(text.length > 2){
+                  excel.setAttribute('href','product/ExcelExport/' + text);
+              }else{
+                  excel.setAttribute('href','/admin/product/AllProductExcelExport');
+              }
+          });
+      });
+  </script>
 @endsection

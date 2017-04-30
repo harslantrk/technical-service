@@ -235,4 +235,60 @@ class ProductController extends Controller
         })->export('xls');
     }
 
+    public function ExcelExportText($text)
+    {
+        $products = DB::table('product')
+            ->join('brand','product.brand_id','=','brand.id')
+            ->join('product_type','product.product_type_id','=','product_type.id')
+            ->join('users','product.user_id','=','users.id')
+            ->orWhere('product.name','like','%'.$text.'%')->orWhere('brand.brand','like','%'.$text.'%')
+            ->orWhere('product_type.product_type','like','%'.$text.'%')
+            ->where('product.status',1)
+            ->select('product.*','brand.brand','product_type.product_type','users.name as uname')
+            ->get();
+
+        Excel::create(Carbon::now()->format('d / m / Y').' '.$text.' Ürünler', function($excel) use($products) {
+
+            $excel->sheet('Ürünler', function($sheet) use($products) {
+
+                $row = 2;
+                $sheet->setAutoSize(true);
+                $sheet->cells('A1:I1',function ($cells){
+                    $cells->setBackground('#e69988');
+                    $cells->setFont([
+                        'family' => 'Calibri',
+                        'size'   => '16',
+                        'bold'   => true
+                    ]);
+                    $cells->setAlignment('center');
+                });
+                $sheet->setBorder('A1:I1','thin');
+                $sheet->row(1,['Ürün Adı','Marka','Ürün Türü',' Açıklama','Stok','Giriş Fiyatı','Çıkış Fiyatı','Girişi Yapan','Giriş Tarihi']);
+                $sheet->setColumnFormat([
+                    'E' => '0',
+                    'F' => '0',
+                    'G' => '0',
+                    'I' => 'd/m/y h:mm'
+                ]);
+
+                foreach ($products as $product) {
+                    $sheet->row($row,[
+                        $product->name,
+                        $product->brand,
+                        $product->product_type,
+                        $product->detail,
+                        $product->stock,
+                        $product->in_price,
+                        $product->out_price,
+                        $product->uname,
+                        Carbon::parse($product->created_at)->format('d/m/Y H:i:s')
+                    ]);
+                    $row++;
+                }
+
+            });
+
+        })->export('xls');
+    }
+
 }

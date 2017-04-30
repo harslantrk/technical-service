@@ -573,40 +573,6 @@
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
-    <!-- Modal Alanı -->
-
-    <div class="modal modal-success fade" id="modalIlkMesaj" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <form role="form">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Bilgilendirme</h4>
-          </div>
-          <div class="modal-body">
-              <div class="box-body">
-                1-	Öğrenci işlemleri (ekleme, arama, silme, listeleme, misafir öğrenci) --- Tamamlandı<br>
-                2-	Personel İşlemleri (ekleme, arama, silme, listeleme)---- Tamamlandı<br>
-                3-	Personeller arası mesajlaşma ---- Tamamlandı Fakat whatsapp şeklinde tekrar yapılıyor. Testleri bittikten sonra yayınlanacak<br>
-                4-	SMS Modülü (Kontür satın alınması gerekecek. Kontür fiyatları ayrıca bildirelecektir.) --- Ekranları hazır fakat sms firmasının api göndermesi bekleniyor<br>
-                5-	Personel Yetkilendirme Sistemi (yetkileri ayrıca gruplandırma)--- Ekranı hazır  fakat yayınlanması için diğer sayfaların bitmesi gerekiyor.<br>
-                6-	Danışman Bilgi Modülü--- Testleri yapılıyor<br>
-                7-	Öğrenci İşlem Modülü --- Testleri yapılıyor<br>
-                8-	Muhasebe Modülü--- İşlem modülleri bittikten sonra danışman firmayla görüşülüp isteklerine bağlı olarak düzenlenecek.<br>
-                9-	Öğrenci Planlama Modülü--- Tasarımı yapılıyor.<br>
-
-              </div><!-- /.box-body -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-          </div>
-        </div><!-- /.modal-content -->
-        </form>
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <!-- /Modal Alanı -->
-
     <!-- fullCalendar 2.2.5 -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
@@ -913,17 +879,6 @@
               error: function(jqXHR, textStatus, err){}
           });
       }
-      
-        $(function () {
-          $('#ogrenci-table').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-          });
-        });
       $(function () {
         //Add text editor
         $("#compose-textarea").wysihtml5();
