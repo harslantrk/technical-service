@@ -232,4 +232,48 @@ class ServiceController extends Controller
             });
         })->export('xls');
     }
+
+    public function AllExcel()
+    {
+        $services = Service::where('status',1)->get();
+
+        Excel::create(Carbon::now()->format('d/m/Y').' Tüm Servisler',function ($excel) use($services){
+            $excel->sheet('Servisler', function ($sheet) use($services){
+
+                $row = 2;
+                $sheet->cells('A1:H1',function ($cells){
+                    $cells->setBackground('#67A8CE');
+                    $cells->setFont([
+                        'family' => 'Calibri',
+                        'size'   => '16',
+                        'bold'   => true
+                    ]);
+                    $cells->setAlignment('center');
+                });
+                $sheet->setBorder('A1:H1','thin');
+                $sheet->row(1,['Müşteri','Ürün','Bildirilen Problem','Yapılan İşlem','Öneri','Emanet','Garanti','Geliş Tarihi']);
+                $sheet->setAutoFilter();
+
+                $warranty = "";
+                foreach ($services as $service) {
+                    if ($service->warranty == 1) {
+                        $warranty = 'Var';
+                    }else{
+                        $warranty = 'Yok';
+                    }
+                    $sheet->row($row,[
+                        $service->customer->name,
+                        $service->product->name,
+                        $service->customer_fault,
+                        $service->process,
+                        $service->process_proposal,
+                        $service->deposit,
+                        $warranty,
+                        $service->created_at
+                    ]);
+                    $row++;
+                }
+            });
+        })->export('xls');
+    }
 }

@@ -271,6 +271,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/service/deletePayment/{id}','Admin\ServiceController@deletePayment');
     Route::get('/admin/service/show/{id}','Admin\ServiceController@show');
     Route::get('/admin/service/ExcelDownload/{id}','Admin\ServiceController@excelDownload');
+    Route::get('/admin/service/AllServiceExcelExport','Admin\ServiceController@AllExcel');
 
     Route::post('/admin/service/save','Admin\ServiceController@save');
     Route::post('/admin/service/update/{id}','Admin\ServiceController@update');

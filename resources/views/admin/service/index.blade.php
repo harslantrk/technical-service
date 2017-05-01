@@ -58,10 +58,10 @@
                                 @if($deleg['d']==1)<a onclick="deleteApprove('/admin/service/delete/{{$service->id}}')" title="Servisi Sil" class="button btn btn-danger"><i class="fa fa-trash"></i></a>@endif
                                 @if($service->process)
                                   @if($deleg['d'] == 1)
-                                        <a onclick="serviceClose('/admin/service/serviceClose/{{$service->id}}')" title="Servisi Kapat !" class="button btn btn-default"><i class="fa fa-close"></i></a>
-                                        <a href="{{URL::to('/admin/service/paymentModalView/'.$service->id)}}" title="Ücret Girişi !" class="button btn btn-default try"><i class="fa fa-try"></i></a>
-                                      @endif
-                                      <a href="{{URL::to('/admin/service/ExcelDownload/'.$service->id)}}" title="Excel indir" class="btn btn-success"><i class="fa fa-file-excel-o"></i></a>
+                                  <a onclick="serviceClose('/admin/service/serviceClose/{{$service->id}}')" title="Servisi Kapat !" class="button btn btn-default"><i class="fa fa-close"></i></a>
+                                  <a href="{{URL::to('/admin/service/paymentModalView/'.$service->id)}}" title="Ücret Girişi !" class="button btn btn-default try"><i class="fa fa-try"></i></a>
+                                  @endif
+                                  <a href="{{URL::to('/admin/service/ExcelDownload/'.$service->id)}}" title="Excel indir" class="btn btn-success"><i class="fa fa-file-excel-o"></i></a>
                                 @endif
                             </td>
                             </tr>
@@ -69,6 +69,9 @@
                         @endforeach
                     </tbody>
                   </table>
+                    <div>
+                        <a id="excel" href="{{URL::to('/admin/service/AllServiceExcelExport')}}" class="btn btn-success"><i class="fa fa-file-excel-o">&nbsp; Excel Çıktısı</i></a>
+                    </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
