@@ -296,6 +296,19 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/admin/instagram','Admin\HomeController@instagram');
+
+    //Sipariş İşlemleri
+    Route::get('/admin/order','Admin\OrderController@index');
+    Route::get('/admin/order/create','Admin\OrderController@create');
+
+    Route::post('/admin/order/OrderControl','Admin\OrderController@OrderControl');
+
+    //Bileşen İşlemleri
+    Route::post('/admin/product/ProductJoin','Admin\ProductController@joinCreate');
+    Route::post('/admin/product/ProductJoinSave','Admin\ProductController@joinSave');
+
+
+    Route::get('/admin/product/ProductJoinDelete/{id}','Admin\ProductController@joinDelete');
 });
 
 

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Brand;
 use App\Comment;
 use App\Http\Requests;
+use App\Joining;
 use App\Product_Type;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
+use Mockery\Exception;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,7 @@ use App\User;
 use App\Product;
 use App\Http\Controllers\Controller;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Session;
 
 
 class ProductController extends Controller
@@ -92,10 +95,16 @@ class ProductController extends Controller
         $product_types = Product_Type::where('status',1)->get();
     	$id = $request->id;
     	$product = Product::where('id',$id)->first();
+    	$product_joins = DB::table('joining')
+                            ->join('product','product.id','=','joining.twoproduct_id')
+                            ->where('joining.product_id',$id)
+                            ->select('joining.*','product.name')->get();
+
     	return view('admin.product.edit',[
     	    'product' => $product,
             'brands' => $brands,
-            'product_types' => $product_types
+            'product_types' => $product_types,
+            'product_joins' => $product_joins
         ]);
     }
     
@@ -270,7 +279,6 @@ class ProductController extends Controller
                     'G' => '0',
                     'I' => 'd/m/y h:mm'
                 ]);
-
                 foreach ($products as $product) {
                     $sheet->row($row,[
                         $product->name,
@@ -285,10 +293,45 @@ class ProductController extends Controller
                     ]);
                     $row++;
                 }
-
             });
 
         })->export('xls');
     }
 
+    public function joinCreate(Request $request)
+    {
+        $data = $request->all();
+        $product_id = $data['product_id'];
+        $products = Product::where('status',1)->where('id','!=',$product_id)->get();
+        $product_one = Product::where('status',1)->where('id',$product_id)->first();
+
+        return view('admin.product.joining',[
+            'products' => $products,
+            'product_one' => $product_one
+        ]);
+    }
+
+    public function joinSave(Request $request)
+    {
+        $data = $request->all();
+        try {
+            Joining::create($data);
+            Session::flash('success','Kayıt Başarılı');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error',$e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    public function joinDelete($id)
+    {
+        try {
+            Joining::find($id)->delete();
+            return redirect()->back();
+        } catch (\Exception $e) {
+            Session::flash('error',$e->getMessage());
+            return redirect()->back();
+        }
+    }
 }

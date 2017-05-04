@@ -4,6 +4,17 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    @if($messaj = \Illuminate\Support\Facades\Session::get('success'))
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{$messaj}}
+      </div>
+    @elseif($mesaj = \Illuminate\Support\Facades\Session::get('error'))
+      <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{$mesaj}}
+      </div>
+    @endif
     <section class="content-header">
       <h1>
         Ürünler
@@ -21,6 +32,9 @@
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">Yeni Ürün Ekleme</h3>
+          <div class="pull-right">
+            <a href="#" id="new_join" class="btn btn-danger" data-toggle="modal" data-target="#modalNewJoin"><i class="fa fa-plus"></i> Bileşen Ekle</a>
+          </div>
         </div><!-- /.box-header -->
         <div class="box-body">
           <!-- form start -->
@@ -98,6 +112,70 @@
           </div>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
+      <div class="row">
+        <div class="col-sm-6">
+          @if($product_joins)
+            <div class="box box-danger">
+              <div class="box-body">
+                <div class="col-xs-12 table-responsive">
+                  <table class="table table-striped text-center">
+                    <thead>
+                    <tr>
+                      <th>Ekli Ürün</th>
+                      <th>Adet</th>
+                      <th class="col-sm-1">İşlem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($product_joins as $product_join)
+                      <tr>
+                        <td>{{$product_join->name}}</td>
+                        <td>{{$product_join->quantity}}</td>
+                        <td>
+                          <a onclick="deleteApprove('/admin/product/ProductJoinDelete/{{$product_join->id}}')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        </td>
+                      </tr>
+                    @endforeach
+                    </tbody>
+                  </table>
+                </div><!-- /.col -->
+              </div>
+            </div>
+          @endif
+        </div>
+      </div>
     </section><!-- /.content -->
   </div><!-- /.content-wrapper -->
+  <!-- Ürüne Bileşen Ekleme Modeli -->
+  <div class="modal fade" id="modalNewJoin" tabindex="-1" role="dialog">
+
+  </div>
+  <input type="hidden" id="product_id" value="{{$product->id}}">
+  <!-- /.modal -->
+@endsection
+@section('jscode')
+  <script>
+      $('#new_join').click(function () {
+          var deger = 'a';
+          var product_id = document.getElementById('product_id').value;
+          $.ajax({
+              url: '/admin/product/ProductJoin',
+              type: 'POST',
+              beforeSend: function (xhr) {
+                  var token = $('meta[name="csrf_token"]').attr('content');
+
+                  if (token) {
+                      return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+                  }
+              },
+              cache: false,
+              data: {deger: deger,product_id:product_id},
+              success: function(data){
+                  document.getElementById('modalNewJoin').innerHTML=data;
+                  $('.select2').select2();
+              },
+              error: function(jqXHR, textStatus, err){}
+          });
+      });
+  </script>
 @endsection

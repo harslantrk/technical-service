@@ -77,4 +77,11 @@ class Helper
 
         return $result;
     }
+
+    public static function dmYHi($tarih)
+    {
+        Carbon::setLocale('tr');
+        $result = Carbon::parse($tarih)->format('d/m/Y H:i');
+        return $result;
+    }
 }
