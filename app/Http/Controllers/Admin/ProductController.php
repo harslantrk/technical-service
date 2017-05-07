@@ -298,6 +298,92 @@ class ProductController extends Controller
         })->export('xls');
     }
 
+    public function ExcelImport(Request $request)
+    {
+        if ($request->hasFile('excelImport')) {
+            $path = $request->file('excelImport')->getRealPath();
+
+            $data = Excel::load($path,function ($reader){})->get();
+
+            if (!empty($data) && $data->count()) {
+                foreach ($data->toArray() as $key => $value) {
+                    if(!empty($value)){
+                        foreach ($value as $v) {
+                            $inserts[] = [
+                                'name' => $v['urun_adi'],
+                                'brand_id' => $v['marka'],
+                                'product_type_id' => $v['urun_turu'],
+                                'user_id' => $v['kullanici'],
+                                'detail' => $v['aciklama'],
+                                'stock' => $v['stok'],
+                                'in_price' => $v['gelis'],
+                                'out_price' => $v['cikis'],
+                                'status' => 1
+                            ];
+                        }
+                    }
+                }
+                echo '<pre>';
+                print_r($inserts);
+                die();
+                foreach ($inserts as $insert) {
+                    $insert = (object)$insert;
+
+                    $user = User::where('name','like','%'.$insert->user_id.'%')->first();
+                    if (count($user)) {
+                        $insert->user_id = $user->id;
+                    }
+                    $Bcontrol = Brand::where('brand','like','%'.$insert->brand_id.'%')->first();
+                    if (count($Bcontrol)) {
+                        $insert->brand_id = $Bcontrol->id;
+                    }else{
+                        $brand = new Brand();
+                        $brand->brand = $insert->brand_id;
+                        $brand->user_id = $insert->user_id;
+                        $brand->status = 1;
+                        $brand->save();
+                        $insert->brand_id = $brand->id;
+                    }
+
+                    $PTControl = Product_Type::where('product_type','like','%'.$insert->product_type_id.'%')->first();
+                    if (count($PTControl)) {
+                        $insert->product_type_id = $PTControl->id;
+                    } else {
+                        $product_type = new Product_Type();
+                        $product_type->product_type = $insert->product_type_id;
+                        $product_type->user_id = $insert->user_id;
+                        $product_type->status = 1;
+                        $product_type->save();
+
+                        $insert->product_type_id =$product_type->id;
+                    }
+
+                    $PControl = Product::where('name','like','%'.$insert->name.'%')->first();
+                    if (count($PControl)) {
+                    }else{
+                        $product = new Product();
+                        $product->name = $insert->name;
+                        $product->brand_id = $insert->brand_id;
+                        $product->product_type_id = $insert->product_type_id;
+                        $product->user_id = $insert->user_id;
+                        $product->detail = $insert->detail;
+                        $product->stock = $insert->stock;
+                        $product->in_price = $insert->in_price;
+                        $product->out_price = $insert->out_price;
+                        $product->status = $insert->status;
+                        $product->save();
+                    }
+                }
+                return redirect()->back();
+
+                /*echo '<pre>';
+                print_r($insert);
+                die();*/
+
+            }
+        }
+    }
+
     public function joinCreate(Request $request)
     {
         $data = $request->all();
@@ -334,4 +420,5 @@ class ProductController extends Controller
             return redirect()->back();
         }
     }
+
 }

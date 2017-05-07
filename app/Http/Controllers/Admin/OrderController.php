@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -57,15 +58,22 @@ class OrderController extends Controller
         $data = $request->all();
         $quantity = $data['quantity'];
 
-        $joinings = DB::table('joining')
-                        ->join('product','product.id','=','joining.twoproduct_id')
-                        ->where('joining.product_id',$data['product_id'])
-                        ->select('joining.*','product.stock','product.name')->get();
+        try {
+            $joinings = DB::table('joining')
+                ->join('product','product.id','=','joining.twoproduct_id')
+                ->where('joining.product_id',$data['product_id'])
+                ->select('joining.*','product.stock','product.name','product.out_price')->get();
 
-        return view('admin.order.controlModal',[
-            'joinings' => $joinings,
-            'quantity' => $quantity
-        ]);
+            $product = Product::where('id',$data['product_id'])->first();
+            return view('admin.order.controlModal',[
+                'joinings' => $joinings,
+                'quantity' => $quantity,
+                'product' => $product
+            ]);
+        } catch (\Exception $e) {
+            Session::flash('error',$e->getMessage());
+            return redirect()->back();
+        }
 
     }
 }

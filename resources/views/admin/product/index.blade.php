@@ -86,6 +86,7 @@
                   </table>
                   <div>
                     <a id="excel" href="{{URL::to('/admin/product/AllProductExcelExport')}}" class="btn btn-success"><i class="fa fa-file-excel-o"> Excel Çıktısı</i></a>
+                      <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modalExcelImport"><i class="fa fa-file-excel-o"></i> Excel'den Ürün Al</a>
                   </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -93,6 +94,36 @@
           </div><!-- /.row -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
+  <!-- Ürüne Bileşen Ekleme Modeli -->
+  <div class="modal fade" id="modalExcelImport" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+          <form action="{{URL::to('admin/product/ExcelImport')}}" method="post" enctype="multipart/form-data">
+              {{ csrf_field() }}
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Sisteme Excel'den Ürün Yükle</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="box-body">
+                          <div class="form-group">
+                             <div class="btn btn-warning btn-file">
+                                 <i class="fa fa-paperclip"></i> Excel Seç
+                                 <input class="btn" type="file" name="excelImport" id="excelImport">
+                             </div>
+                              <button type="submit" class="btn btn-success" id="btnExcelImport" disabled>Excel'den Ürün Al</button>
+                          </div>
+                      </div><!-- /.box-body -->
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
+                  </div>
+              </div><!-- /.modal-content -->
+          </form>
+      </div><!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 @endsection
 @section('jscode')
   <script type="text/javascript">
@@ -105,6 +136,20 @@
                   excel.setAttribute('href','product/ExcelExport/' + text);
               }else{
                   excel.setAttribute('href','/admin/product/AllProductExcelExport');
+              }
+          });
+          //Excel Dosya Kontrolü
+          $('#excelImport').change(function () {
+              var value = $('#excelImport').val();
+              var file = value.split('.');
+              var uzanti = file[file.length-1];
+              var btnExcel = document.getElementById('btnExcelImport');
+
+              if(uzanti == 'xlsx' || uzanti == 'xls'){
+                  btnExcel.removeAttribute('disabled');
+              }else{
+                  sweetAlert('Geçersiz Dosya');
+                  btnExcel.setAttribute('disabled','');
               }
           });
       });

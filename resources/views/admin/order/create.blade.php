@@ -79,6 +79,7 @@
 @section('jscode')
     <script type="text/javascript">
         var product_id = document.getElementById('product_id');
+        var control = document.getElementById('control');
             $('#quantity').keyup(function () {
                 var quantity = document.getElementById('quantity').value;
                 console.log(product_id.selectedIndex+'-'+quantity);
@@ -96,8 +97,8 @@
                     cache: false,
                     data: {quantity: quantity,product_id:product_id.selectedIndex},
                     success: function(data){
-                        document.getElementById('control').removeAttribute('style');
-                        document.getElementById('control').innerHTML=data;
+                        control.removeAttribute('style');
+                        control.innerHTML=data;
                         //Buton değiştirme İşlemleri
                         var nothingCount = $('.nothing').length;
                         var btnKaydet = document.getElementById('btnKaydet');

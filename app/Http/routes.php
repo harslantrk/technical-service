@@ -259,6 +259,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/product/ImagePostSave','Admin\ProductController@ImagePostSave');
     Route::post('/admin/product/commentThought','Admin\ProductController@commentThoughtSave');//Ürün İçin Yoruma Olumlu Olumsuz Ekleme
     Route::post('/admin/product/commentSave','Admin\ProductController@commentSave');
+    Route::post('/admin/product/ExcelImport','Admin\ProductController@ExcelImport'); //Excel Aramalı
     /*Ürünler Modülü Bitiş*/
 
     // Servis Modülü Başlangıç
